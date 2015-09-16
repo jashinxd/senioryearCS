@@ -1,0 +1,40 @@
+9/11 - Aim: C what I did there?
+Do Now:
+From Yesterday:
+     4) Figure out what gcc does
+     	man gcc
+     5) Copy woohoo.c from your home directory to a /code/ directory on homer
+        scp woohoo.c jason.shin@homer.stuy.edu:/code
+	     ^source      ^destination          ^remote directory
+	*Colon is necessary. If you leave out path, file goes to home directory
+	*Remote to remote or Remote to current also work
+
+Today:
+     List all the Java primitive variable types
+     int      32 bit integer
+     float    floating point
+     boolean  True/False
+     char     character
+     short    16 bit integer
+     double   64 bit floating point
+     long     64 bit integer
+     byte     8 bit integer
+     *bool and byte are not in C
+
+     Last Class Today:
+     	  1 student chosen at random everyday. That evening, the person will be
+	  responsible for posting notes to Piazza page. Tag the note as "last 
+	  class today".
+	  	Title the note LCT <MM/DD WEEKDAY>
+		For example, LCT 9/10 Thursday
+
+		Also include at the end of the note a link to an interesting 
+		piece of tech news.
+
+9/12 - Aim: Variables are the spice of life.
+Do Now: What is the smallest variable type that could be used to store the
+   following values (using standard sizes)?
+   1) 5 --> 
+   2) -30,000 -->
+   3) 255 -->
+   4) 5,000,000,000 	  
