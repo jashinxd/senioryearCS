@@ -92,6 +92,7 @@ Data Types and Variables
 	  ex. unsigned char x;
 	      0 <= x <= 255
 
-     int main() {
+     int main() {    	--> You don't need the arguments in main
      	 return 0;
      }
+     
