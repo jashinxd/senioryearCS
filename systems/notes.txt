@@ -68,3 +68,30 @@ C Primitive Variable Types
        YOU WILL ALL MAKE THIS MISTAKE:
        	   if (x = 6) {...}
        *The assignment value will return the value you are assigning.
+
+9/17
+Aim: Always read the fine print.
+Do Now: Open up your editor of choice (emacs)
+   	Write a basic "Hello World" program in java.
+
+Data Types and Variables
+     
+     Character literals are single characters inside ''
+     	  ex. 'a', '*' ...
+     
+     String literals exists, even though there is no String data type.
+     	  ex. "hello", "you smell"
+     
+     Variables cannot be declared inside for loops statements, but they can be
+     initialized.
+     
+     Any variable type can be declared an "unsigned" variable
+     This signifies the variable will never be negative.
+     	  The lower bound of of any unsigned variable is 0
+	  The upper bound will be greater than the signed version
+	  ex. unsigned char x;
+	      0 <= x <= 255
+
+     int main() {
+     	 return 0;
+     }
