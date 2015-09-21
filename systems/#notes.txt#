@@ -116,7 +116,7 @@ Do Now: How do you declare/use arrays in java?
    in order to use the functions in those libraries.
    
    Usual libraries to include
-   #include <studio.h>
+   #include <stdio.h>
    #include <stdlib.h>
    	<> indicates the library is in one of the normal places where C
    	libraries are.
