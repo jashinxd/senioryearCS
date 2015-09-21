@@ -1,0 +1,7 @@
+if __name__ == "__main__":
+   print "LOADING AS MAIN"
+else:
+   print "LOADING AS MODULE"
+
+git checkout --> takes away changes until last commit
+   
