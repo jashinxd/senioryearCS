@@ -4,4 +4,60 @@ else:
    print "LOADING AS MODULE"
 
 git checkout --> takes away changes until last commit
-   
+
+virtualenv pd7en
+cd bin
+source activate
+pip install flask
+
+9/22
+Make default app.py
+
+Route	     call this function
+/home	     home()
+/about	     about()
+
+app.py
+from flask import Flask
+
+app = Flask(__name__), render_template
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/about")
+def about():
+    page = """
+    <h1>About</h1>
+<hr>
+<ol>
+<li>Fred Flintstone</li>
+<li>Mr. T</li>
+<li>The Hulk</li>
+</ol>
+"""
+    return page
+
+@app.route("/home") --> if you go to path home, run this function)
+@app.route("/")
+def home():
+    return "<h1>Hello World</h1>"
+
+@app.route("/lucky")
+def lucky():
+    import random
+    number = random.randrange(1, 100)
+    return "Lucky Number: %d"%(number)
+
+if __name__ == "__main__":
+    app.debug = True;
+    app.run(host = '0.0.0.0', port = 8000)
+    #127.0.0.1 --> private address to use
+    
+
+You would run this program on localhost:8000/home
+""" -->multiline string
+"""
+
+Web templates are used to create the HTML.
