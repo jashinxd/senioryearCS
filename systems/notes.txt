@@ -145,7 +145,7 @@ Do Now: How do you declare/use arrays in java?
 	   char array %s
 	   pointer    %p
 
-9/19 - Aim: What's the point of it all?
+9/22 - Aim: What's the point of it all?
 SOTD: Hunger Strike - Temple of the Dog
 
 Memory Management
@@ -165,6 +165,41 @@ Memory Management
 	Must have a fixed size
 	There is no length function
 	There is no boundary checking
-	    Ex: int fred         int a[10]
-	    	   [ ]   [ ]   [ ]   [ ]   [ ] ...
+	    Ex:    bob fred a[0]  a[1]  a[2]  a[3]
+	    	   [ ]  [ ]  [ ]   [ ]   [ ] ...
+		   992  996  1000
+
+9/22 - Aim: Ok, now we're really going to get to the point
+SOTD: Here Comes the Helicopter
+   bob fred a[0]  a[1]  a[2]  a[3]
+   [7] [86]  [ ]   [ ]   [ ] ...
+   992  996  1000
+   
+   int a[5];
+   int fred;
+   fred (996) = 86;
+   int *pfred
+
+   Variable names are placeholders for memory addresses.
+
+   Pointers - Now the fun really starts
+   	Variable that is designed to store memory addresses (think references
+	in java)
+
+   & is used to get the memory address of a variable.
+     	Ex) &fred
+   * is used to declare a variable as a pointer type
+        Ex) int *p, double *q, char *r, ...
+
+	  pfred     fred
+	  [996] --> [86]
+       	  2020	    996
+	  
+	  *pfred = &fred
+
+   32 Bit Processor vs 64 Bit Processor
+      	32 bit can read in 32 bits of memory and 64 bit can read in 64 bits of 
+	memory
+	32 bit system can only have 2^32 bits of memory, or 4 GB of RAM
+	64 bit system can have 2^64 bits of memory
 
