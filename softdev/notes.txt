@@ -61,3 +61,46 @@ You would run this program on localhost:8000/home
 """
 
 Web templates are used to create the HTML.
+
+def lucky():
+    import random
+    n = random.randrange(1, 100)
+    return render_template("lucky.html", number = n)
+
+lucky.html file:
+<!DOCTYPE HTML>
+<h1>Lucky Number</h1>
+<h2>Your Lucky Number is {{number}}</h2>
+ -n will replace number in the HTML file.
+
+Dictionaries:
+    d = {}
+    d[10] = "hello"
+    d['one'] = 12345
+    d['two'] = "Something"
+    can also be initialized with values
+    d = {'one': hello, 'two': 12345}
+    Mutable
+
+{10:'hello', 'one': 12345, 'two' = "Something"}
+    d.has_key() - checks if a key exists
+    d.keys() - returns all the keys
+
+You can access the variables using d[key] or d.key
+You can also print out the dictionary itself
+Now, instead of using {{variable}}, you will be able to use {{d[variable]}} in
+the template.
+
+Lists:
+    a = [10, 20, 'thirty', 40, 'fifty']
+    You can return char in string by a[index] or multiple by a[startind:endind]
+
+You can also run loops
+    Ex)<ul>
+	 {% for item in l %}
+    	 <li>{{item}}</li>
+	 {% endfor %}
+       </ul>
+
+@app.route("/profile/<lastname>")
+def profile(lastname=""):
