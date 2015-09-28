@@ -203,3 +203,68 @@ SOTD: Here Comes the Helicopter
 	32 bit system can only have 2^32 bits of memory, or 4 GB of RAM
 	64 bit system can have 2^64 bits of memory
 
+Aim: Ok, now we're really goinng to get to the point.
+SOTD: Lump - The Presidents of the United States of America
+
+Do Now:
+   1) Declare int, double, and char variables.
+        int a;
+	double b;
+	char c;
+   2) Declare int, double, and char pointers.
+      	int *pa;
+	double *pb;
+	char *pc;
+   3) Initialize each pointer to the address of the corresponding variable.
+	pa = &a;
+	pb = &b;
+	pc = &c;
+   4) Print out the pointer's value for each (as an unsigned long)
+        printf( pa = %lu\n", *pa);
+	printf( pb = %lu\n", *pb);     
+	printf( pc = %lu\n", *pc);
+   5) 
+
+   Adding 1 to a pointer type will increase the memory address by the amount of 
+   bytes of that type.
+   Adding a void pointer type adds 1 to memory address
+   Pointers - The fun really starts
+   
+   Variables designed to store memory addresses (think references in java)
+
+       & is used to get the address of the variable
+       
+       * is used to declare a variable as a pointer type
+       	 ex. int *p, double *q, char *r
+	 
+       Node n;
+        n
+       [0] --> null
+
+       * is also used as the de-reference operator
+            It accesses the value at the memory location stored in a pointer
+
+       All pointer variable types are the same size
+       
+       Pointer Arithmetic
+            int *p = &1;
+	    int *c = &i;
+	    
+	    p++; //will add 4 to p
+	    c++; //will add 1 to p
+
+       Array variabes are immutable pointers.
+
+       Pointers can be assigned to array variables
+       int ray[5];
+       int *rp = ray;
+
+       ray[3] <===> *(rp + 3)
+       rp and ray point to ray[0]
+       [ ] [ ] [42] [ ]
+        0   1   2    3
+       a[i] notation is shorthand for *(a+1)
+       in fact...
+       	  a[i] <===> *(a + 1)
+	  i[a] <===> *(i + a)      
+	    

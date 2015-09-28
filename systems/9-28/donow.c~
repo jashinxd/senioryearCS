@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//1) Declare int, double, and char variables.
+int a;
+double b;
+char c;
+// 2) Declare int, double, and char pointers.
+int *pa;
+double *pb;
+char *pc;
+// 3) Initialize each pointer to the address of the corresponding variable.
+pa = &a;
+pb = &b;
+pc = &c;
+// 4) Print out the pointer's value for each (as an unsigned long).
+printf( pa = %lu\n, pa);
+printf( pb = %lu\n, pb);     
+printf( pc = %lu\n, pc);
