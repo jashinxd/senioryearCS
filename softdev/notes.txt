@@ -104,3 +104,53 @@ You can also run loops
 
 @app.route("/profile/<lastname>")
 def profile(lastname=""):
+
+================================================================================
+9/28
+If you make a directory called static, you can load things from that folder
+   ex) <img src="/static/thiuffy.png>
+
+GET Request
+    <form>
+	name: <input type="text" name = "name">
+	age: <input type="text" name = "age">
+	<input type="submit" name="button" value="ok">
+	<input type="submit" name="button" value="cancel">
+    </form>
+
+import request
+def index():
+    print request.__dict__ //prints out dictionary of request
+    print request.args //returns an immutable dictionary with all the args.
+{% for a in args %}
+   
+{% endfor %}
+
+   request.args.get(index)
+
+   However, GET is insecure and may run out of space.
+   Most web api's usually use GET
+
+POST Request
+    <form method="POST">>
+        name: <input type="text" name = "name">
+	password: <input type="text" name = "pasword">
+	<input type="submit" name="button" value="login">
+	<input type="submit" name="button" value="cancel">
+    </form> 
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method=="GET":
+        return render_template("login.html")
+    else:
+	//print request.args
+	
+	<h1>Logging in</h1>
+//GET goes into args index, POST goes into form index
+      ex) print request.form['username']
+      ex) print request.form['username']
+      ex) print request.form['username']
+      
+To authenticate, you can make a module called utils.py and put authenticate
+function in it.
