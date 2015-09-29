@@ -203,7 +203,7 @@ SOTD: Here Comes the Helicopter
 	32 bit system can only have 2^32 bits of memory, or 4 GB of RAM
 	64 bit system can have 2^64 bits of memory
 
-Aim: Ok, now we're really goinng to get to the point.
+9/28 - Aim: Ok, now we're really goinng to get to the point.
 SOTD: Lump - The Presidents of the United States of America
 
 Do Now:
@@ -266,5 +266,58 @@ Do Now:
        a[i] notation is shorthand for *(a+1)
        in fact...
        	  a[i] <===> *(a + 1)
-	  i[a] <===> *(i + a)      
-	    
+	  i[a] <===> *(i + a)
+
+SOTD: In The Meantime - Spacehog
+9/29 - Aim: Time to stop stringing you along.
+
+float fray[5];
+float *fp = fray[0]; --> Will try to point to memory address 2.3 (DNE)
+      	    	     	 Valid, but you don't mean this.
+
+float *fp = fray; 
+      fray--> will point to 824
+      	      will print out 824
+      *fp --> 2.3, derefernece operator
+
+fray--> [2.3] [ 2 ] [81.7] [.21] [ 5 ]
+	 824   828   832    
+
+Value of ray and rp are both the same memory address because they point to the
+same thing.
+*ray and *rp will dereference what is there and are the same. *ray = ray[0].
+&ray and %rp can be different. Usually different from the value of ray and rp
+themselves, but can sometimes be the same. 
+
+fp + 2 --> will return 832
+*fp + 2 --> will return 4.3 
+*(fp + 2) --> will dereference mem address 832 --> 81.7
+
+ray[2] <==> *(ray + 2) <==> *(2 + ray) <==> 2[ray]
+Braket notation simply means add these two numbers.
+
+rp++; --> modifying a pointer variable is fine.
+ray++; --> ERROR: cannot increment the array variable pointer.
+
+C Strings (ctrings)
+    Strings are character arrays that end with a null character (either '' or 0
+    or '\0')
+
+    ['c'] ['a'] ['t'] [ 0 ]
+
+    The terminating null character is a convention, string functions will not 
+    work without it.
+
+    The following are valid ways to declare strings:
+    	char s[256];
+	     Normal array declaraction, allocates 256 bytes, nothing is set
+	     automatically. Can return junk.
+    	char s[256] = "Imagine";
+	     Allocates 256 bytes, puts "Imagine" in the first 7 bytes AND adds 
+	     a null at the 8th byte. It may still cause a problem if array size
+	     is not large enough.
+	char s[] = "Tuesday"
+	     Allocates 8 bytes, puts "Tuesday" in the first 7 bytes AND adds a
+	     null at the 8th bytes.
+    *Only time you can directly declare a string to the same char array 
+     variable.
