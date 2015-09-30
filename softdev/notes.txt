@@ -133,7 +133,7 @@ def index():
 
 POST Request
     <form method="POST">>
-        name: <input type="text" name = "name">
+        uname: <input type="text" name = "<username">
 	password: <input type="text" name = "pasword">
 	<input type="submit" name="button" value="login">
 	<input type="submit" name="button" value="cancel">
@@ -154,3 +154,44 @@ def login():
       
 To authenticate, you can make a module called utils.py and put authenticate
 function in it.
+
+Object Oriented programming is based on states, while functional programming
+is based on constant changing states.
+
+To keep track of the user, use the hidden tag in the form
+   Hidden code --> the same code goes back and forth to track user.
+   Cookies --> Browser tells what goes where, only sends to that particular site
+   	       Will always be encrypted.
+
+Session --> Python object that works as a dictionary to keep track of cookies
+import session from flask
+
+if __name__ == "__main__":
+   app.debug = True
+   app.secret_key = "Don't store this on github for security"
+
+@app.route("/inc")
+def inc():
+    if 'n' not in session:
+       session['n'] = 0
+    n = session['n']
+    n = n + 1
+    session['n'] = n
+    return render_template("counter.html", n = n) 
+
+There is a redirect you can import
+import redirect, url_for
+@app.route("/reset")
+def reser():
+    session['n'] = 0
+    return redirect("/inc")
+    return redirect(url_for("/inc"))
+
+Look at classcode for more detail.
+
+ASSIGNMENT
+About page - open to everybody
+Secret page - you can only see if you are logged in. if not, redirect ito login
+       	      page
+Login page - login page to access secret page
+Logout - redirect to login page.
