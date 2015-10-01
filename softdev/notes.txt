@@ -195,3 +195,15 @@ Secret page - you can only see if you are logged in. if not, redirect ito login
        	      page
 Login page - login page to access secret page
 Logout - redirect to login page.
+
+f = open("data.dat", "w")
+f.write("Hello\n")
+f.write("World\n")
+f.close()
+f = open("data.dat", "r")
+s = f.read()
+s = f.readline()
+
+import shelve
+d = shelve.open("shelf.dat")
+shelve must only have strings as keys, unlike dictionaries
