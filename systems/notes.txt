@@ -351,7 +351,7 @@ Do Now: Write a c program that does the following
 
 int main() {
   char s[] = "RandomStringLOL";
-  char * p = s;
+  char *p = s;
   int size = 0;
   /*
   while (*p) {    //--> This works because anything other than 0 is true.
@@ -363,9 +363,52 @@ int main() {
   while (*p++) { //--> will derederence then add 1
     size++;
   }
-  printf("Length of *&s* = %d\n", s, size);
+  printf("Length of *%s* = %d\n", s, size);
   return 0;
 }
 
-C is a procedural funstion.
+C is a procedural function. Order that the functions appear in is important.
   You can make a function header.
+      ex) int len(char *s);
+
+SOTD: Tom Sawyer - Rush
+Aim: How to write functioning code.
+Functions: a brief interlude:
+  All C functions are "pass by value"
+      A parameter is a copy of the variable passed into the function. The
+      original variable is not touched.
+      
+  ex) void foo(char *s, int i);
+      int x = 5;
+      char *w = "cool";
+      foo(w, x);
+
+       x    w
+      [5] [8010]
+            '-->[c][o][o][l][0]
+
+      You can change what w points to, but you cannot change its value
+
+  You can put your headers in a header file
+  file - stringy.h
+  int len(char *s);
+  
+  Then, in stringy.c, you can
+  #include "stringy.h"
+
+Back to Ctrings
+     string.h
+	C library that includes useful string functions
+	All the functions 
+
+	int strcomp( char *s1, char *s2 )
+	    Returns 0 if s1 and s2 are identical
+	    Returns positive if s1 is greater than s2
+	    Returns negative number is s1 is less than s2
+	char * strcpy (char *dest, char *source)
+	    C
+	char * strcat (char *s1, char *s2)
+	Appends all the characters i[ 
+	   returns s1
+	strncat( char s1, char s2, int )
+           appends at most n chars from s2 into s1
