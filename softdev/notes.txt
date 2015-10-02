@@ -207,3 +207,10 @@ s = f.readline()
 import shelve
 d = shelve.open("shelf.dat")
 shelve must only have strings as keys, unlike dictionaries
+
+Locking
+    You can have as many readers as you want, but when you are writing, you want
+    to lock.
+
+Flask Shelve
+    Install using pip install Flask-Shelve
