@@ -412,3 +412,23 @@ Back to Ctrings
 	   returns s1
 	strncat( char s1, char s2, int )
            appends at most n chars from s2 into s1
+
+SOTD: Fake Plastic Trees - Radiohead
+Aim: Make it so
+char *s1 = "Hello";
+char *s2 = "Hello";
+char s3[] = "Hello";
+
+"Hello" --> Immutable because it is a string literal
+C does not want extra memory. s1, s2, and s3 all point to the same piece
+of memory for "Hello"
+s1 and s2 are pointers. They will actually POINT to the SAME immutable string
+"Hello".
+When you declare an array, it will give you a new piece of memory with "Hello"
+in it, so you can change it
+When including a header file for a library you created for a different main
+method, it will return an error.
+To get around this, compile them at the same time
+gcc main.c stringy.c --> Two main functions! Returns an error.
+Just comment out main function in stringy.c, allowing main.c to run.
+Having no main functions is also a problem.

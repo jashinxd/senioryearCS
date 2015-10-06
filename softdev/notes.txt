@@ -214,3 +214,29 @@ Locking
 
 Flask Shelve
     Install using pip install Flask-Shelve
+
+10/5
+Relational Databases
+    Student		Teacher		    Course		
+    ID    Name		ID    Name	    ID    Name
+    1	  Yasmeen	1     Brown	    1	  APCS
+    2	  Max		2     K		    2	  Precalc
+    3	  Daisy		3     C		    3	  H Precalc
+    4	  Sam		4     DW	    4	  Intro CS
+    5	  Mary		5     Z		    5	  BC Calc
+    6	  Thluffy
+
+    SID		TID	    CID	        Term	     Grade
+    2		4	    4		2012	     98
+    2		3	    5		2014	     65
+    6		3	    5		2014	     55
+    5		2	    1		2014	     95
+
+    Query (Student, Name)
+    Query (Trans, SID, Term)
+    etc...
+
+    Structured Query Language
+    SQL (aka Sequal)
+
+    Oracle, Sybase, IBM DB2
