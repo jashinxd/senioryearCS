@@ -240,3 +240,38 @@ Relational Databases
     SQL (aka Sequal)
 
     Oracle, Sybase, IBM DB2
+
+10/6
+Postgresql - Yes transactions, but slower
+mysql - No transactions, but faster
+
+SQLite - Does SQL as a library.
+
+.open doughnutstore.db
+.tables
+CREATE TABLE doughnuts (name TEXT, price REAL, qty INTEGER);
+INSERT INTO doughnuts VALUES ("jelly",2.50,10);
+.schema
+.dump
+.close
+.open doughnutstore.db
+DROP TABLE doughnuts
+.read doughbuts.sql
+
+Can be lowecase, but tradition is uppercase
+
+.read doughnuts.sql
+SELECT * FROM doughnuts;
+SELECT name,price FROM doughnuts;
+SELECT * FROM doughnuts where name = 'chocolate';
+SELECT * FROM doughnuts where name like '%c';
+SELECT * FROM doughbuts where qty < 10;
+etc...
+
+rowid - id of a row
+
+delete from doughnuts where rowid > 6;
+
+INSERT, SELECT, DELETE
+
+update doughnuts set qty=qty-1 where name="chocolate";
