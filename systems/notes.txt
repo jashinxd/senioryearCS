@@ -430,5 +430,58 @@ When including a header file for a library you created for a different main
 method, it will return an error.
 To get around this, compile them at the same time
 gcc main.c stringy.c --> Two main functions! Returns an error.
-Just comment out main function in stringy.c, allowing main.c to run.
+Just comment out main function in stringy.c, allowing main function in  main.c to run.
 Having no main functions is also a problem.
+
+SOTD: Rearviewmirror - Pearl Jam
+Aim: Make it so
+
+Separate Compilation
+
+    You can combine mutiple C files into a C program by incuding them all in one
+    gcc command.
+    	ex.
+	    gcc test.c string.c foo.c woohoo.c
+    You cannot have duplicate function or global variable names across these
+    files. This includes the main() function.
+
+    gcc --> Creates an executable file by looking for methods in headers and
+    linking them to functions in the standard path. You need to specify where
+    the methods in the header function are if they are not in the standard path.
+    Will find the main function and link all the functions called in main and
+    put them into the executable file.
+    If you have multiple main methods, comment one out.
+
+    gcc -c
+    	Will compile a c file into a .o file, it is not a fully functional
+	program, but it is compiled code. Do this to compile a .c file that does
+	not contain a main() function. Will not create an executable file
+	
+	You can now compile main.c, and then combine with dwstring.o
+	gcc main.c dwstring.o
+
+    	__________________________
+	V	      |		  V
+    dwstring.h    dwstring.c    main.c    
+    		      ^	^_______  ^
+		      |         | |
+		  dwstring.o <---a.out
+
+    Dependency - files that need to be changed because of another changed file.
+
+    Make
+	Create compiling instructions and setup dependencies
+	Standard name for the file is makefile
+	syntax:
+	    <TARGET>: <DEPENDENCIES>
+	    TAB<RULES>
+
+    makefile
+    a.out: dwstring.o main.c
+    	    gcc dwstring.o main.c
+
+    dwstring.o: dwstring.c dwstring.h
+    	    gcc -c dwstring.c
+
+    main.o: main.c dwstring.h
+    	    gcc -c main.o
