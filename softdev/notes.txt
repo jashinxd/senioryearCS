@@ -244,3 +244,94 @@ from flask import markup
 Markup(l) --> tells
 
 {{list | safe}}
+
+10/5
+Relational Databases
+    Student		Teacher		    Course		
+    ID    Name		ID    Name	    ID    Name
+    1	  Yasmeen	1     Brown	    1	  APCS
+    2	  Max		2     K		    2	  Precalc
+    3	  Daisy		3     C		    3	  H Precalc
+    4	  Sam		4     DW	    4	  Intro CS
+    5	  Mary		5     Z		    5	  BC Calc
+    6	  Thluffy
+
+    SID		TID	    CID	        Term	     Grade
+    2		4	    4		2012	     98
+    2		3	    5		2014	     65
+    6		3	    5		2014	     55
+    5		2	    1		2014	     95
+
+    Query (Student, Name)
+    Query (Trans, SID, Term)
+    etc...
+
+    Structured Query Language
+    SQL (aka Sequal)
+
+    Oracle, Sybase, IBM DB2
+
+10/6
+Postgresql - Yes transactions, but slower
+mysql - No transactions, but faster
+
+SQLite - Does SQL as a library.
+
+.open doughnutstore.db
+.tables
+CREATE TABLE doughnuts (name TEXT, price REAL, qty INTEGER);
+INSERT INTO doughnuts VALUES ("jelly",2.50,10);
+.schema
+.dump
+.close
+.open doughnutstore.db
+DROP TABLE doughnuts
+.read doughbuts.sql
+
+Can be lowecase, but tradition is uppercase
+
+.read doughnuts.sql
+SELECT * FROM doughnuts;
+SELECT name,price FROM doughnuts;
+SELECT * FROM doughnuts where name = 'chocolate';
+SELECT * FROM doughnuts where name like '%c';
+SELECT * FROM doughbuts where qty < 10;
+etc...
+
+rowid - id of a row
+
+delete from doughnuts where rowid > 6;
+
+INSERT, SELECT, DELETE
+
+update doughnuts set qty=qty-1 where name="chocolate";
+
+10/7
+select name from people,doughnuts;
+Error: ambiguous column name: name --> name is in both people and doughnuts
+
+select people.name,doughnuts.name from people,doughnuts;
+       Joins name of people and name of doughnuts, each person gets a doughnut
+
+select people.name,doughnuts.name from people,doughnuts where doughnuts.name="glazes" and age < 10;
+
+select * from people, classes where people.id = 6
+We know 6 is in people id, but not in the classes.
+So, we do
+select * from people, classes where people.id = classes.id
+This will match each student to his/her class
+order by grade - orders by grade
+
+How sql is misused:
+In blogs, a gigantic table would be used where comments would be under the post
+tables.
+However, by separating the users, posts, and comments into different tables,
+with connections to each other, it would make things more efficient.
+
+Index fields to expidite searches.
+Balanced search tree, log(n) performance.
+You can have multiple indices.
+
+2-3 trees, only data in leaves. Every node has 2 or 3 children, or a leaf.
+
+B Tree - Like a 2-3 tree, but every node has 511 or 512 children, or a leaf.
