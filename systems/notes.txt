@@ -705,3 +705,36 @@ typedef struct n {
 ...
 #endif
 Good convention to do this for all header files to remove conflicts
+
+SOTD: Wheels - Cake
+Aim : File this under useful information.
+Do Now: What are the different kinds of file permissions?
+   	Read	     	 Write	       Execute
+Also, who has these permissions?
+
+dev - filled with files with devices.
+random in dev --> seeds a random num  generator with random bits in memory.
+sranddev() --> seeds using random in dev
+
+File Permissions
+     3 Kinds of Permissions
+         read, write, execute
+
+     Permissions can be represented as 3 digit binary numbers, or 1 digit octal
+     numbers:
+
+     R	    W	   W
+     1	    0	   0 => 4 (base 8)
+     0	    1 	   0 => 2 (base 8)
+     0	    0	   1 => 1 (base 8)
+     1	    1	   1 => 7 (base 8)
+
+     There are 3 permission "areas"
+     	 user, group, others --> Mutually exclusive sets
+
+ 	 each area can have its own permissions:
+	 
+	 644 => user: read + write, group: read, other: read
+
+     To change the permissions -> chmod 600 foo.
+     Owner of the file can change the permissions of the file.
