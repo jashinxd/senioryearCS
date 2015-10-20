@@ -478,10 +478,230 @@ Separate Compilation
 
     makefile
     a.out: dwstring.o main.c
-    	    gcc dwstring.o main.c
+    	    gcc dwstring.o main.o
 
     dwstring.o: dwstring.c dwstring.h
     	    gcc -c dwstring.c
 
     main.o: main.c dwstring.h
     	    gcc -c main.o
+    First target is always run. The subsequent files will also be checked if
+    there are other dependencies. Will recursively check.
+
+SOTD: Breaking the Girl - Red Hot Chili Peppers
+Aim: If you can't (al)locate your memory, then... I forget
+
+Dependencies:
+dwstring.c    dwstring.h    main.c
+        \      /        \   /
+       dwstring.o       main.o
+       	     \____  _____/
+		 a.out
+
+In order to create a.out, you need to combine dwstring.o and main.o
+In order to create dwstring.o, you need to combine  dwstring.c and dwstring.h
+In order to create main.o, you need to combine dwstring.h and main.c
+Think about what files you need in order to create the file you are thinking of
+For any particular .o file, you will usually only need one .c file.
+Make a dependency chart to put togeter a decent makefile.
+
+make will run a makefile named makefile.
+If make is run again without being modified, nothing will happen
+
+    makefile
+    all: dwstring.o main.c
+    	    gcc -o string_test dwstring.o main.o
+
+    dwstring.o: dwstring.c dwstring.h
+    	    gcc -c dwstring.c
+
+    main.o: main.c dwstring.h
+    	    gcc -c main.o
+    clean:
+	    rm *.o
+	    rm *~
+    run:
+	    ./string_test
+
+    First target is always run. The subsequent files will also be checked if
+    there are other dependencies. Will recursively check through the
+    dependencies.
+
+If you use a name, it will always run.
+EX) make all --> will run gcc dwstring.o main.o
+
+You can also specify the target
+EX) make dwstring.o
+
+Compares the timestamps of the dependencies and the timestamp of the target.
+If timestamp dependency > timestamp target, it will run the rules.
+
+'clean' will never happen untill it is called upon because it has no
+dependencies.
+
+'make run' will run the program.
+
+All future assignments will involve a make file.
+Don't upload the executable/.o files
+
+Dynamic Memory Allocation:
+    malloc(int x)
+        Allocates x bytes of memory (from the heap)
+
+	Returns the address at the beginning of the allocation
+
+	Returns a void *, always typecast to the correct pointer type.
+
+        int *p;
+	p = (int *)malloc(5 * sizeof(int));
+	Will allocate 20 bytes of memory.
+
+	Similar to 'new' in java
+
+    calloc(int n, int x);
+        Allocates n * x bytes of memory
+
+	Ensures that each bit is set to 0.
+
+	Works like malloc in all other ways
+
+	int *p;
+	p = (int *)calloc(5, sizeof(int));
+
+    realloc(void *p, int x)
+    	Changes the amount of memory allocated to a given block.
+    
+	p must be a pointer to the beginning of an allocated block of memory, 
+	but it does not have to be the original pointer
+   
+	x is the amount of memory reallocated, NOT amount adding/taking away.
+ 
+	If x is smaller than the original size of the allocations, the extra 
+	bytes will be released.
+
+    	int *p;
+   	p = (int *)malloc(20);
+    	p = (int *)realloc(p, 40);
+
+10/9
+SOTD: Papa's Got a Brand New Bag - James Brown
+Aim: Always structure your code well.
+
+Dynamic Memory Allocation
+    Normal memory allocation happens on the stack.
+    
+    Stack memory gets released as functions pop off.
+
+    Dynamic memory is located on the heap, it persists even after the funtion
+    that created it pops off the stack.
+
+    You must manually release dynamically allocated memory from the heap.
+
+    As long a program is running, any memory associated with it will be there.
+    When a program ends, memory associated with the program is released.
+
+
+    free
+	Releases dynamically allocated memory.
+	
+	Takes one parameter, a pointer to the beginning of a dynamically
+	allocated block of memory.
+	
+	Every call to malloc/calloc should have a corresponding call to free.
+
+	int *p;
+	p = (int *)malloc(20);
+	free(p);
+
+    When you try to change the pointer to the allocated memory, you get an error
+    Error is descriptiive because we are requesting memory through the OS.
+    Having another pointer point to the beginning is fine.
+
+    Typedef
+	Provide a new name for an existing type.
+	
+	typedef <realtype> <new name>;
+	typedef float bubbles;
+
+	Often put in a header files.
+	
+    	ex: typedef unsigned int size_t;
+            size_t x = 139 //x is really an unsigned int
+
+    Struct
+	A collection of values in a single data type
+	struct {int a; char x;} s;	
+	
+	To access the data in the struct, you would use the . notation
+	ex: struct {int a; char c} s;
+	    struct {int a; char c} t;
+	    
+	    s.a = 97;
+	    t.c = '@';
+
+	struct foo {int a; char c};
+	struct foo s;
+	struct foo t;
+
+	foo is like header, it represents {int a; char c;}
+	
+	typedef struct n {int a; struct n *next;} node;	
+	foo t;
+	
+	foo *t;
+	t = (foo *)malloc( sizeof(foo) );
+	
+	(*t).a = 97;
+	t->a
+
+SOTD: Low Rider - War
+Aim: Zelda's in trouble, get Link!
+Do Now: What's wrong with this function?
+   	(Assume node has been declared correctly)
+
+node * insert_front(node * n, int i) {
+     node new;
+     new.i = i;
+     new.next = n;
+     return &new;
+}
+new is part of stack memory, which would be popped off the stack after the
+function called ends. In order to keep the value of node, you would need to
+allocate memory on the heap.
+
+It is acceptable to have your function headers lack names for your variables as
+long as you have the type.
+
+C - Always use lowercase letters, but separate words by underscores.
+print_list - snakecase
+printList - camelcase
+
+library.h
+#include "link_list.h"
+void print_artist(song.node *);
+
+main.c
+#include "link_list.h" --> You don't need this because library.h already 
+	                   includes it. BUT it does not show that linked_list.h
+			   is included if you take it out.
+#include "library.h"
+
+# --> pre-processor instruction
+
+#define --> Allows you to create a constant in your code
+#define foo 27
+
+#ifndef --> Stands for "if not defined"
+#ifndef foo 
+#def foo
+     <code> 
+#endif
+
+#ifndef LINK_LIST_H
+#define LINK_LINK_H
+typedef struct n {
+...
+} song_node;
+...
+#endif
+Good convention to do this for all header files to remove conflicts
