@@ -216,11 +216,7 @@ Locking
 Flask Shelve
     Install using pip install Flask-Shelve
 
-<<<<<<< HEAD
 
-
-
-=======
 in base.html:
 {% block head %}
 {% endblock head %}
@@ -396,3 +392,20 @@ c.execute(q)
 conn.commit() - When you do an insert, you must run this
 
 10/9
+
+
+
+
+
+10/20
+Nosql:
+    Schemaless
+    Low cost of entry
+
+One we will be using: Mongodb
+
+sql:			Mongodb:
+server			server
+database		database
+tables			collections
+record			document
