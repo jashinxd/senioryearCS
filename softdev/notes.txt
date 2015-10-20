@@ -216,9 +216,40 @@ Locking
 Flask Shelve
     Install using pip install Flask-Shelve
 
+<<<<<<< HEAD
 
 
 
+=======
+in base.html:
+{% block head %}
+{% endblock head %}
+
+{% block body %}
+{% endblock body %}
+
+{% block foot %}
+{% endblock foot %}
+
+in index.html:
+
+{% extends "base.html" %}
+{% block body %}
+<h1>
+whatever you want to put in
+</h1>
+{% endblock body %}
+
+in stufftoinclude.html:
+<h3>this stuff is included</h3>
+
+in include.html:
+{% include "stufftoinclude.html" %}
+
+from flask import markup
+Markup(l) --> tells
+
+{{list | safe}}
 
 10/5
 Relational Databases
