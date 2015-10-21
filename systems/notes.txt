@@ -723,7 +723,7 @@ File Permissions
      Permissions can be represented as 3 digit binary numbers, or 1 digit octal
      numbers:
 
-     R	    W	   W
+     R	    W	   E
      1	    0	   0 => 4 (base 8)
      0	    1 	   0 => 2 (base 8)
      0	    0	   1 => 1 (base 8)
@@ -737,4 +737,68 @@ File Permissions
 	 644 => user: read + write, group: read, other: read
 
      To change the permissions -> chmod 600 foo.
-     Owner of the file can change the permissions of the file.
+     Owner of the file can ALWAYS  change the permissions of the file.
+
+10/21
+Note: Don't compile .h files!
+SOTD: Everything - MrNorth
+Aim: Opening up a whole new world of possibilities.
+
+     Owner of the file can ALWAYS  change the permissions of the file.
+
+     chown - changes owner of the file.
+     chgrp - changes the group of the file.
+
+     File Table
+     	 A list of all files used by a program while it is running.
+	 
+	 Contains basic information like the file's location and size.
+
+	 The file table has a limited size, which is a power of 2 and commonly
+	 256, getdtablesize() will return this value. (int) - in <unistd.h>
+
+	 Each file is given an integer index, starting at 0, this is referred
+	 to as the file descriptor.
+
+     EX File Table:
+         File Descriptor |   Name (path)  | Location | 
+	 ---------------------------------------------
+		0	 |     stdin	  |	     |
+	     	1	 |     stdout	  |	     |
+		2	 |     stderr	  |	     |
+	 
+	 There are 3 files that are always open in the table: 
+	     0 or STDIN_FILENO: stdin
+	     1 or STDOUT_FILENO: stdout
+	     2 or STDERR_FILENO: stderr
+
+open - <fcntl.h>
+     Add a file to the file table and returns its file descriptor
+     
+     If open fails, -1 is returned, extra error information can be found in
+     a variable called errno - You need to call <errno.h> to get this.
+     
+	errno is an int variable that can be found in <errno.h>, using strerror
+	(in <string.h>) on errno will return a string description of the error
+
+     open( <PATH>, <FLAGS>, <MODE> )
+     
+     mode
+	Only used when creating a file. Set the new file's permissions using a 3
+	digit octal #
+
+	Octal number have a leading 0
+	    0644, 0777
+	    
+     flags
+	Determine what you plan to with the file.
+	
+	Use the following constants:
+	    O_RDONLY
+	    O_WRONLY
+	    O_RDWR
+	    O_APPEND
+	    O_TRUNC
+	    O_CREAT
+	    O_EXCL: When combined with O_CREAT, will return an error if the file
+	    	    exists
