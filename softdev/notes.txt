@@ -395,8 +395,6 @@ conn.commit() - When you do an insert, you must run this
 
 
 
-
-
 10/20
 Nosql:
     Schemaless
@@ -409,3 +407,53 @@ server			server
 database		database
 tables			collections
 record			document
+
+show dbs -> shows databases
+use pd7 -> opens database
+db.dropDatabase() -> drops db
+
+BSON and JSON objects
+x = {"name": "Tom", "age": 20}
+  You dont have to put the quotes around the keys.
+  You can access variables using [] or . notation.
+  You can add things too.
+
+db.people.insert(x)
+db.people.insert({name: 'Sue', age: 40})
+db.find()
+Object IDs (hash codes) are associated with each colection.
+show collections --> shows the collections in the db
+db.system.indexes.find() --> finds the indexes in the db.
+
+You can also create a list of items
+    l = [{name: "Allen", age: 44}, {name: "Zeke", age: 55}]
+    You can now do things like
+    l[1][age], etc
+    You can insert the whole list now
+db.people.insert(l)
+
+db.people.find({name: 'Sue'})
+    Give the find function a piece of a dictionary we know, will return
+db.people.find({age: 40}) --> returns people whose age is 40
+
+Documentation on mongodb
+
+db.people.remove() --> removes everyone
+
+db.people.remove({name: "Tom})
+db.people.insert(x)
+db.people.remove({name: "Tom"}, {justOne:true})
+    All the stuff you can do for find you can do here
+
+db.people.update({'name': "Tom"}, {'age':30})
+    finds what's in first
+instead, do
+db.people.update({'name': "Tom"}, {$set:{'age':41}})
+
+upsert --> If search is possible, updates. If not, creates a new entry
+    db.people.update({'name': "Tom"}, {$set:{'age':41}}, {upsert:true})
+    Only updates one.
+    
+    
+
+
