@@ -802,3 +802,55 @@ open - <fcntl.h>
 	    O_CREAT
 	    O_EXCL: When combined with O_CREAT, will return an error if the file
 	    	    exists
+	All numbers, powers of 2
+
+10/22
+SOTD: Fly Me To The Moon - Frank Sinatra
+Aim: Read your writes!
+     EXLC    TRUNC    CREAT    APPEND    RDWR    WRONLY    RDONLY
+     0	     0	      1	       0	 0	 0	   0	--> CREAT
+     1	     0	      0	       0	 0	 0	   0	--> EXLC
+     0	     0	      0	       0	 0	 1	   0	--> WRONLy
+     1	     0	      1	       0	 0	 1	   0	--> ALL OF THESE
+
+     bitwise operators
+         &: bitwise and
+	 |: bitwise or
+	 ~: bitwise not
+	 ^: bitwise xor
+
+	 logical operators work on each bit of a value
+	 
+	 char c = 13;	//00001101
+	 char x = ~c; 	//11110010
+
+	 Two's complement
+	 
+     flags
+	 Each flag is a number, to combine flags we use bitwise or
+	 
+	 O_WRONLY = 1		00000001
+	 O_APPEND = 8		00001000
+	 O_WRONLY | O_APPEND = 	00001001
+
+     close - <unisrd.h>
+     	 Remove a file from the file table
+	 
+	 Returns a 0 if unsuccessful. Returns -1 amd sets errno if unsuccessful.
+	 close( <FILE DESCRIPTOR> );
+
+read - <unistd.h>
+     Read in a data from a file
+
+     read( <FILE DESCRIPTOR>, <BUFFER>, <AMOUNT> )
+     read(fd, buffer, n)
+     
+     Read n bytes from the fd's file and put that data into buff.
+     
+     Returns the number of bytes actually read. Returns -1 and sets errno if
+     unsuccessful.
+
+     BUFFER must be a pointer, otherwise it cannot be modified.
+
+write parameters are identical to read parameters.
+
