@@ -453,7 +453,33 @@ db.people.update({'name': "Tom"}, {$set:{'age':41}})
 upsert --> If search is possible, updates. If not, creates a new entry
     db.people.update({'name': "Tom"}, {$set:{'age':41}}, {upsert:true})
     Only updates one.
-    
-    
+
+db.people.find().sort("age") --> sorts by age
+
+update
+
+db.people.find({'name': "Tom"}, {"_id":False}) --> Doesn't show id
 
 
+10/22
+connection = MongoClient()
+
+from pymongo import MongoClient
+
+#For security
+db.connection.admin
+db.authenticate("username", "password")
+
+#From command line: use pd7
+db = connection['pd7']
+
+#from command line: show collections
+print db.collection_names()
+
+#We can drop a collection using db.collection.drop
+
+#exactly analagous to doing it from the command line
+db.people.insert(d)
+
+res = db.people.find()
+print res
