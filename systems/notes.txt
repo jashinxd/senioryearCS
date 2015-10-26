@@ -791,7 +791,7 @@ open - <fcntl.h>
 	    0644, 0777
 	    
      flags
-	Determine what you plan to with the file.
+	Determine what you plan to do with the file.
 	
 	Use the following constants:
 	    O_RDONLY
@@ -854,3 +854,29 @@ read - <unistd.h>
 
 write parameters are identical to read parameters.
 
+10/26
+SOTD: Crazy - Gnarls Barkley
+Aim: Seek and ye shall find
+
+int r
+int *s
+
+r (4 bytes)   s (8 bytes)
+ [	]       [  0  ] --> [integer]
+
+fd1 = open("goo", O_CREAT, 0666);
+
+There is a umask() function that can shut off permissions
+umask(0111); --> This would shut off execute.
+default umask is (0022); --> Doesn't allow write and exec for group and others
+if umask(0000); --> All permissions will be available.
+
+lseek - <unistd.h>
+      Set the current position in an open file
+      
+      lseek( <FILE DESCRIPTOR>, <OFFSET>, <WHENCE> )
+      
+      Offset - How many bytes to move the position by.
+      Whence -
+      	     Where to measure the offset by
+		 
