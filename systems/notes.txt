@@ -880,3 +880,38 @@ lseek - <unistd.h>
       Whence -
       	     Where to measure the offset by
 		 
+10/28
+SOTD: For What It's Worth - Buffalo Springfield
+Aim: I need information, stat!
+Do Now:
+   1) Make a directory
+   2) Put a few files in that directory and maybe even a directory or two
+
+   Metadata - Data about data. (i.e last modified, who created it, etc.)
+
+   stat - <sys/stat.h>
+       Get information about a file (metadata)
+       stat( <PATH TO FILE>, <STAT BUFFER> )
+       
+       Not an opened file, you don't need a file descriptor
+       
+           struct stat sb;
+      	   stat("foo", &sb);
+
+       to look up man page, use man 2 stat.       
+
+       stat buffer
+       	   Must be a pointer to a struct stat
+	   
+	   All the file information gets put into the stat buffer
+	   
+	   Some of the fields in the struct stat:
+	       st_size
+	           file size in bytes
+	       st_uid, st_gid
+	       	   user id, group id
+	       st_mode
+	           file permissions    
+  	       st_atime, st_mtime
+	           last access, last modification
+	       
