@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main() {
+  int i, x, status;
+
+  printf("pid: %d\n", getpid());
+  printf("parent pid: %d\n", getppid());
+  
+  i = fork();
+
+  printf("pid: %d\n", getpid());
+  printf("parent pid: %d\n", getppid());
+  
+  return 0;
+}

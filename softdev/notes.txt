@@ -494,7 +494,7 @@ curl - opening web socket to get data from a website.
 screenscraping - Getting data from a website. Will break when website
 	       	 changes internally.
 
-import urllib2
+import urllib2, json
 from bs4 import BeautifulSoup
 
 url="http://www.nytimes.com"
@@ -505,3 +505,19 @@ for r in soup.find_all("h2"):
     print r
 
 Use APIs to get dynamic data -- ex) openweathermap
+
+11/4
+GIL - Global Interpreter Lock
+Green Unicorn - Allows for multiple users to use it.
+Put secret key outside.
+gunicorn -w 4 -b 0.0.0.0:8000 app:app
+
+import urllib2
+import json
+r = json.loads(result)
+Converts into a python dictionary.
+
+11/5
+Postman extension
+Programmableweb.com --> API database
+

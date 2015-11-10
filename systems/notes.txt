@@ -977,3 +977,210 @@ Aim: Where do compsci priests live? - In directory!
     Resets the directory stream to the beginning
     
     rewinddir( <DIRECTORY STREAM> )
+
+10/30
+SOTD: War Pigs - Black Sabbath
+Aim: Puttin' in the puts.
+
+Command line arguments:
+
+    int main( int argc, char *argv[] )
+
+    program name is considered the first command line argument
+    
+    argc
+	number of command line arguments
+    
+    argv
+	array of command line arguments (strings)
+
+scanf - <stdio.h>
+    
+    scanf( <FORMAT STRING>, <VAR 1>, <VAR 2>, ... )
+    
+    Reads in data from stdin using the format string to determine types.
+    
+    Puts the data in each variable.
+    
+    Variables must be pointers.
+
+    EX)
+        int x;
+	float y;
+        scanf("%d %f", &x, &y);
+	
+    "Enter" flushes the buffer and sends the data to stdin.
+    Good for short inputs, but generally don't use it.
+    Returns the number of matched values
+	
+fgets - <stdio.h>
+
+    Read in from a file stream and store it in a string.
+    
+    fgets( <DESTINATION>, <BYTES>, <FILE POINTER> )
+    
+    Puts a terminating null in the last byte, and reads in the new line
+    ("enter")
+    
+    fgets( s, n, f );
+        Reads at most n-1 characters from file stream f and stores it in
+	s.
+
+    File pointer
+    
+        File * type, more complex than a file descriptor
+	
+	stdin is a FILE * variable
+    
+
+11/4
+Aim: Are your processes running? - Then you should go out and catch them!
+Do Now: Run the command ps in terminal. What do you see?
+
+ps shows the current running processes running from the terminal
+ps -ax shows all running processes (even those not from terminal)
+
+Processes
+    Every running program is a process. A process can create subprocesses
+    but thse are no different from regular processes.
+    
+    A processor can handle one process per cycle (per core).
+    "Multitasking" appears to happen because the processor switches
+    between all the active processes quickly.
+
+    pid
+	Every process has a unique identifier called the pid.
+
+	pid 1 is the init process
+
+	Each entry in the /proc directory is a current pid
+
+    getpid() <unistd.h>
+    	returns the current process' pid
+	
+    getppid() - <unistd.h>
+    	returns the current process' parent pid
+
+    fork() - <unistd.h>
+    	Creates a separate process based on the current one, the new
+	process is called the child, the original is the parent.
+	
+	The child process is a duplicate of the parent process. All parts
+	of the parent process are copied, including stack and heap memory
+	and the file table.
+
+	    A quick note on threads: A thread is a separate executable
+	    entity similar to a child process, except a thread is not a
+	    standalone process. It does not have its own memory space,
+	    instead it shares its parent's memory. 
+
+	In the child process, fork() returns 0, and in the parent 
+	process, fork() returns the child's PID or -1 (errno).
+
+	If a parent process ends before the child, the child's new parent
+	pid is 1
+
+11/5
+SOTD: Us and Them - Pink Floyd
+Aim: Go fork off (another process)
+
+When we call fork, both the parent and the child process runs the program
+
+sleep(int secs) --> delays code for secs seconds
+
+	  bash
+	   |
+	   |__  
+	      |	 fork()
+	      | <-- ls
+	      |
+	   |
+	   | <--bash returns when child finished
+
+wait - <unistd.h>
+     Stops a parent process from running until any child has provided
+     status information to the parent (usually the child has exited).
+     
+     Returns the PID of the child that exited, or -1 (errno).
+     
+     Return value of status only has room for one byte.
+
+     WEXITSTATUS(status); - Get the return value of child process.
+
+11/10
+SOTD: Losing My Religion - REM
+Aim: Time to bring out the executioner
+
+You can put a child's function in one file, the parent's function in another,
+and then include them in the main file.
+
+childs_play function returns 25, but the actual process returns 0, because
+we are still in the main function
+
+Instead, you can just return childs_play()
+
+exit() - Takes 1 parameter, which is the return value of the process.
+         Stops the program.
+	 
+waitpid( PID, &status, 0 ) - waits for a specific child process' PID.
+
+11/11
+SOTD: Burden in my Hand - Soundgarden
+Aim: Invasion of the process snatchers.
+
+waitpid - <unistd.h>
+    Waits for a specific child
+    waitpid(pid, status, options)
+        pid
+	    The pid of the specific child to look for
+	    If -1, will wait for any child
+	
+	options
+	    Can set other behavior for wait, if 0, will work normally.
+
+The exec family - <unistd.h>
+    There are a number of C functions that can be used to run other programs
+    from within our own programs.
+    
+    Replaces the current process with the new program, any code after a call to
+    an exec function will be ignored.
+
+    execl
+	execl( <PATH>, <COMMAND>, <ARGS>, NULL )
+
+	PATH
+	    The path to the program (ex: "/bin/ls")
+	    You can't use '~' for the home directory in the code
+
+    	COMMAND
+	    The name of the program (ex: ls)
+	    What you use to invoke ls
+	
+	ARGS
+	    Each command line argument you wish to give the program
+	    (ex: "-a", "-l")
+	
+    	The last argument must be NULL in order to tell execl that there are
+	no more arguments
+
+    Example
+        execl("/bin/ls", "ls", "-a", "-l". NULL)
+	
+    execlp
+	execlp( <PATH>, <COMMAND>, <ARGS>, NULL )
+	
+	Works like excel, except it uses the PATH environment variable for
+	commands, so you can use "ls" as the PATH instead of "/bin/ls"
+	
+	execlp( "ls", "ls", "-a", "-l", NULL)
+	You still need the "ls" twice.
+
+    execvp
+	execvp( <PATH>, <ARGUMENT ARRAY> )
+	
+	ARGUMENT ARRAY
+	    Array of strings, with element 0 must be the name of the program to
+	    be executed and the last element must be NULL.
+	    
+            Like execlp, the PATH argument will take the PATH environment into 
+	    account.
