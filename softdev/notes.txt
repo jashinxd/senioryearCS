@@ -521,3 +521,34 @@ Converts into a python dictionary.
 Postman extension
 Programmableweb.com --> API database
 
+11/12
+STEP 1:
+    Always read the README.
+    Changes - Changelog file --> Time/Date, etc.
+        No real need for this, because of commit messages.
+    Todo file - Roadmap moving ahead.
+    
+STEP 2: CONVENTIONS!
+     Look at the directory structure 
+     Look at filenames
+     Keep conventions (app.py, static, templates, etc)
+     utils.py --> file for small utility functions.
+     You want to have logical groupings.
+
+C Program
+/*------------------- mod.c ---------------------*/
+/*
+    Description of the modile
+    
+    void f1(int x) - brief description of function f1
+    
+    void f2(int a, int b) - brief description of function f2
+*/
+
+/*-----------------includes--------------------*/
+#include <stdio.h>
+
+/*----------------defines-------------------*/
+#define MYVAL 1
+
+,
