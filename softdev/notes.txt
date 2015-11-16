@@ -551,4 +551,38 @@ C Program
 /*----------------defines-------------------*/
 #define MYVAL 1
 
-,
+11/13
+PEP - Python Enhancement Proposal
+PEP 0008 - Coding standard for python
+pycco
+pydoc - Like javadoc
+epydoc --html mod -> Pip install
+
+sphinx --> pip install
+run sphinx-quickstart
+
+11/16
+WHo played spiderman?
+
+STEP 1:
+Query
+
+STEP 2:
+Get a billion web pages with the query words
+
+STEP 3:
+Extract text
+
+STEP 4:
+Analyze the text
+EX) Who --> means that we are looking for names
+    	Look for 2 capital words with space in between
+	Title (Mr., Ms., Dr.)
+	List of popular first names
+    Where
+    When
+
+Do this using regular expressions.
+
+STEP 5:
+Number of documents the name appeared in.

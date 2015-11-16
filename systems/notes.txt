@@ -1233,3 +1233,49 @@ strsep - <string.h>
 
     If strsep reaches the end of the string without finding the
     delimiter, it will return null.
+
+11/16
+SOTD: Gimmie Shelter - The Rolling Stones
+Aim: Redirection, how does it ... SQUIRREL
+
+File Redirection
+    Changing the usual input/output behavior of a program.
+    
+    Command line redirection
+        >
+	    Redirects stdout to a file.
+	    Overwrutes the contents of the file
+	    <COMMAND> > <FILE>
+	    EX) ls > file_list.txt
+
+	>>
+	    Redirects stdout to a file
+	    Appends instead of overwrites
+	
+	2>
+	    Redirects stderr to a file
+	    Overwrites the file (2>> appends)
+
+	&>
+	    Redirects stdout and stderr
+
+	< 
+	    Redirects stdin from a file
+	    EX) ./exec < foo.txt
+	    
+	| ( pipe )
+	    Redirects stdout from one command to stdin of the next
+
+    Redirection in C programs
+    
+        dup2 - <unistd.h>
+	    Redirect one file descriptor to another
+	    dup2( fd1, fd2 )
+	        Redirects fd2 to fd1
+		Basically duplicates first file descriptor to the second
+
+        dup - <unistd.h>
+	    
+	    x = dup(1);
+	    dup2(3, 1);
+	    dup2(4, 1);
