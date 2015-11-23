@@ -586,3 +586,47 @@ Do this using regular expressions.
 
 STEP 5:
 Number of documents the name appeared in.
+
+
+11/17
+Regular Expressions
+    Any letter matches itself
+    ^123 -> Only lines that begin with 123
+    123$ -> Only lines that end with 123 
+    [tTaA] -> Match one of these
+    [^tTaA] -> Match everything except these
+    [x-y] -> Ranges (ascii values, can be numbers or letters)
+    [0-9] or /d -> Any numeric digit
+    /w -> any letter character (not consistent)
+    [0-9][0-9][0-9] -> Match 3 numbers
+    [0-9]{3} -> Match a single digit 3 times
+    ? -> 0 or 1 of the previous. Like an optional digit.
+    * -> 0 or more of the previous.
+    + -> 1 or more of the previous.
+    . -> Any single character
+
+import re
+    re.search
+    re.findall(pattern, string you are parsing)
+
+Testing tools
+
+11/18
+pip install google
+pip install beautifulsoup
+
+if __name__ == "__main__":
+   import doctest
+   doctest.testmod()
+
+In python, you need to escape parentheses for regex
+
+Grouping is important.
+
+re.sub(pattern, "newstuff", string)
+" //1-//2-//3" - Groups
+
+Get rid of common words
+Stemming - look for ing, er, etc.
+	 converts into without pre/suff
+

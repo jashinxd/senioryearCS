@@ -1279,3 +1279,11 @@ File Redirection
 	    x = dup(1);
 	    dup2(3, 1);
 	    dup2(4, 1);
+
+11/17
+Two commands you cannot fork or exec in order for the shell to work
+    -cd
+    -exit
+
+chdir(<PATH>) --> will change directory if possible. Returns -1 and
+	          errno will print.
