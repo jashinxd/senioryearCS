@@ -630,3 +630,17 @@ Get rid of common words
 Stemming - look for ing, er, etc.
 	 converts into without pre/suff
 
+11/23
+class cdemo():
+    def __init__(self, x=20 (default value)):
+        self.x = 20
+
+_ -> would be considered private
+
+unittest
+
+Digital Ocean:
+    add ssh keys
+    ssh root@<ip>
+    
+
