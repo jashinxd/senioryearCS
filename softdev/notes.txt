@@ -642,5 +642,10 @@ unittest
 Digital Ocean:
     add ssh keys
     ssh root@<ip>
-    
 
+
+11/30
+Put JS at the bottom
+OR put it in a separate file
+x = 20 --> Global variable everywhere
+var x = 20 --> variable within context
