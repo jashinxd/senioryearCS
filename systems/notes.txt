@@ -1287,3 +1287,46 @@ Two commands you cannot fork or exec in order for the shell to work
 
 chdir(<PATH>) --> will change directory if possible. Returns -1 and
 	          errno will print.
+
+
+11/30
+SOTD: Billie Jean - Michael Jackson
+Aim: Sending mixed signals
+
+Signals
+    Limited way of sending information to a process.
+
+    kill
+	Command line utility to send a signal to a process
+
+	$ kill <PID>
+	    Sends signal 15 (SIGTERM) to PID
+	    
+	    $ kill -<SIGNAL> <PID>
+	    sends SIGNAL to PID
+
+	    man 3 signal
+
+    killall [-<SIGNAL>] <PROCESS>
+        Sends SIGTERM (or SIGNAL if provided) to all processes
+	with PROCESS as the name
+
+Signal handling in C programs <signal.h>
+
+    kill
+        Send a signal to a process in a C program
+	kill(<PID>, <SIGNAL>)
+	Returns 0 on success or -1 (errno) on failure.
+
+    sighandler
+        To work with signals in a C program you must create a
+	signal handling function.
+	
+	Some signals (like SIGKILL) cannot be caught.
+	
+	static void sighandler( int signo )
+	
+	Must be static, must be void, must take a single int
+	parameter.
+	
+	Has to be in the program itself, not the header files
