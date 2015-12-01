@@ -939,7 +939,7 @@ Aim: Where do compsci priests live? - In directory!
        the directory along with basic information like file type.
 	
        Moving files into/out of a directory means changing the directory file, 
-       not actually moving any data.
+       OBnot actually moving any data.
 
    opendir - <dirent.h>
        Open a directory file
@@ -1327,6 +1327,25 @@ Signal handling in C programs <signal.h>
 	static void sighandler( int signo )
 	
 	Must be static, must be void, must take a single int
-	parameter.
+	parameter. Can be a different name.
 	
-	Has to be in the program itself, not the header files
+	Has to be in the same file as the main method, not the 
+	header files
+
+12/1
+SOTD: Say it aint so - Weezer
+Aim: You want the signal? You can't handle the signal!
+
+     signal( <SIGNUMBER>, sighandler )
+
+     EX) signal( SIGINT, sighandler );
+
+     This will not stop the program, because now we are deviating
+     from the original behavior. At the end, we do exit(0) to
+     actually stop the program.
+
+     Kill is unhandleable.
+
+     After you create the function, you attach the signals to it
+     using the signal function.
+
