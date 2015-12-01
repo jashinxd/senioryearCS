@@ -649,3 +649,34 @@ Put JS at the bottom
 OR put it in a separate file
 x = 20 --> Global variable everywhere
 var x = 20 --> variable within context
+
+12/1
+function f(n) {
+    x = 30;
+    console.log("In f: "+x+n);
+}
+
+console.log(x);
+
+Javascript is not block scoped.
+Use the var!!!!!!
+
+(function (x) { return x * x }) (5)
+You can assign functions to variables.
+var fact = function fact(n) {
+    var prod = 1;
+    for ( ; n > 1; n-- ) {
+    	prod = prod * n;
+    }
+    return prod;
+}; <-- This semicolon is convention
+
+If you give more parameters than necessary, it will ignore the rest
+If you don't give enough, it may not necessarily crash.
+
+DOM - Document Object Model
+Allows you to get elements of the page.
+document.getElementsByID("blue");
+Documentation online.
+
+look up additem/removeitem functions DOM.
