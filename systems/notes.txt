@@ -1019,6 +1019,7 @@ fgets - <stdio.h>
     
     fgets( <DESTINATION>, <BYTES>, <FILE POINTER> )
     
+ Say it aint so - Weezer
     Puts a terminating null in the last byte, and reads in the new line
     ("enter")
     

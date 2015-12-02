@@ -647,6 +647,7 @@ Digital Ocean:
 11/30
 Put JS at the bottom
 OR put it in a separate file
+<script src="intro.js"></script>
 x = 20 --> Global variable everywhere
 var x = 20 --> variable within context
 
@@ -680,3 +681,28 @@ document.getElementsByID("blue");
 Documentation online.
 
 look up additem/removeitem functions DOM.
+
+12/2
+<button id="b">Add</button>
+Callback routine - always has a parameter that is the action.
+
+var buttonCallback = function(e);
+    addItem("HELLO");
+};
+var b = document.getElementById('b');
+b.addEventListener('click', buttonCallback);
+
+Disable the cache
+
+e.preventDefault();
+
+javascript this:
+    this is similar to self in python
+    	 is similar to this in java
+
+    this in javascript refers to the context you are in
+    i.e If you are in an event in the DOM element, you are able to get
+    	that DOM element using this.
+
+
+
