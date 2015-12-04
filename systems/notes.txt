@@ -1408,3 +1408,68 @@ Shared Memory - <sys/shm.h>, <sys/ipc.h>, <sys/types.h>
 		SHM_RDONLY: makes the memory read only.
         
 	Ex) shmat( sd, 0, 0 )
+
+12/4
+SOTD: Plush - Stone Temple Pilots
+Aim: Memes
+
+Shared memory does not only apply to Parent-Child relationships, 
+but also applies to any process, as long as the permissions allow.
+
+Shared Memory!
+    ftok
+        Generate a key for useful for IPC (Interprocess communication) 
+	functions.
+
+    ftok( path, x )
+    
+        path
+	    A path to some file, the file must be accessible by the
+	    program running.
+	    
+        x
+	    An int
+
+        You could use the header file of the program for the path.
+	The generated key will be the same for separate calls.
+	
+	sd = shmget( ftok("dir/file", 12), 1024, IPC_CREAT | 0644 )
+
+    shmdt
+        Detach a variable from a shared memory segment.
+	
+	Returns 0 upon success or -1 upon failure.
+	
+	shmdt( pointer )
+	
+	    pointer
+	        The address used to access the segment.
+
+	Example
+	    shmdt( p );
+
+    shmctl
+        Each shared memory segment has metadata that can be stored in
+	a struct (struct smid_ds)
+	
+	Some of that data can be stored: last access, size, pid of creator,
+	pid of last modification
+	
+	shmctl( descriptor, command, buffer )
+	
+	    descriptor
+	        Return value of shmget
+		
+	    Commands:
+	        IPC_STAT: populate the buffer (struct shmid_ds) with
+			  information
+
+	    	IPC_SET: set some of the information for the segment to the 
+			 info in buffer
+
+		IPC_RMID: Remove a shared memory segment.
+
+	Example:
+	     sd = shmget( key, sizeof(int), 0644 );
+	     struct shmid_ds d;
+	     shmctl( sd, IPC_STAT, d) ;
