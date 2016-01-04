@@ -704,5 +704,105 @@ javascript this:
     i.e If you are in an event in the DOM element, you are able to get
     	that DOM element using this.
 
+12/7
+jQuery - js module
+Download and insert into where you wanna use it.
+Download both uncompressed and minified versions.
+Javascript minifier
+cdn - using js modules from the cloud. -- Cloudflare.
 
+jQuery("ol") --> Returns jQuery array of ordered list
+jQuery("h1") --> Retruns jQuery array of h1
+jQuery("ol l1")
+jQuery(".green")
+
+$("ol").append($("<li>A new item</li>"))
+$("ol").append($("<ol><li>new Item A</li><li>new Item B</li></ol>"))
+$("ol li").addClass('red')
+$("li").addClass('red')
+$("ul li").removeClass('red') --> implied loop, does it to every item.
+
+$("ol li").each(function() {<code>});
+$("ol li").each(function(i, item) {console.log()});
+You can pass in jQuery strings into your own functions. (classcode)
+
+You can do effects! (just look up documentation)
+
+Use jQuery when it makes sense!
+
+AJAX - Asychronous Javascript and XML
+
+
+12/8
+$.get("datafile", function(d){
+  console.log("We got" + d)
+});
+ --> gets data from datafile. Could be anything.
+We don't know when this is going to happen, so you need the function
+to run what would happen if we got the file.
+
+python -m SimpleHTTPServer
+-->Serves current directory on port 8000.
+-->Use this when you get data from file.
+
+templates --> html
+statc--> js, css, imgs, etc
+
+callback --> goes to and from py file right away, but there is a delay
+	     from where it ends and when the python func returns.
+
+This happens because of run to completion behavior in js
+
+guinicorn --> it works with gunicorn, but not in built in flask python 
+	      server b/c only has 1 thread. gunicorn has multi-threading.
+
+12/9
+In order to get the older behavior, you would call the function from the
+slow function.
+postman chrome extension.
+Try to design as an API.
+.getJSON
+
+Simple website that has 2 ajax calls
+1 is based on a timer
+2nd is based on responses on a page
+
+12/14
+Groups of 3 or 4 within the class.
+Polished
+Video
+Clean Code / Documentation.
+
+Tools:
+Panda
+NLTK
+opencv
+Twilio
+Sendgdd
+mobile ---> css libraries
+phonegap
+oauth
+geolocation
+
+1. Assassin Game
+   Location where when you get closer to your target, screen gets
+   brighter
+   QR Code
+
+2. Competition Scheduling application
+   Allows you to click on people's names to view match history
+   Implement a facebook API, query for their names
+
+3. NFC to make songs play at the same time
+   Master Slave phone
+
+4. Autmatically buy things when they come back in stock
+   
+5. Compile a list of things that you want to buy, sends you a text
+
+6. Video compiling from different angles at events (VR)?
+
+7. Things to do on a trip (Trip planner)
+
+8. 
 

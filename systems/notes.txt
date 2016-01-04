@@ -1390,7 +1390,7 @@ Shared Memory - <sys/shm.h>, <sys/ipc.h>, <sys/types.h>
 		IPC_EXCL: Fail if the segment already exists and
 			  IPC_CREAT is on
 	Ex) int sd;
-	    sd = shmget( 24601, sizeof(int), 0644 | O_CREAT )
+	    sd = shmget( 24601, sizeof(int), 0644 | IPC_CREAT )
 
     shmat
         Attach a shared memory segment to a variable.	
@@ -1464,8 +1464,8 @@ Shared Memory!
 	        IPC_STAT: populate the buffer (struct shmid_ds) with
 			  information
 
-	    	IPC_SET: set some of the information for the segment to the 
-			 info in buffer
+	    	IPC_SET: set some of the information from the segment to 
+			 the info in buffer
 
 		IPC_RMID: Remove a shared memory segment.
 
@@ -1473,3 +1473,552 @@ Shared Memory!
 	     sd = shmget( key, sizeof(int), 0644 );
 	     struct shmid_ds d;
 	     shmctl( sd, IPC_STAT, d) ;
+
+12/7
+SOTD: The General - Dispatch
+Aim: How do we flag down a resource?
+
+Semaphores (created by Edsgar Dijkstra)
+    IPC counstruct used to control access to a shared resource (like a
+    file or shared memory).
+    
+    Essentially, a semaphore is a counter that represents how many
+    processes can access a resuorce at any given time.
+    
+	If a semaphore has a value of 3, then it can have 3 active users.
+	If a semaphore has a value of 0, then it is unavailable.
+
+    	Semaphore is not attached to the resource in any way. It is only
+   	used if your program does so.
+	
+    Most semaphore operationos are "atomic", meaning they will not be
+    split up into multiple processor instructions.
+    
+    Semaphore operations:
+    
+        Create a semaphore.
+	Set an initial value.
+	Up(S) / V(S)
+	    Release the semaphore to signal you are done with its
+	    associated resource.
+	      
+	    pseudocode:
+	        s++
+	Down(S) / P(S)
+	    Attempt to take the semaphore.
+	    
+	    If the semaphore is 0, wait for it to be available.
+	    
+	    pseudocode:
+	        while( s == 0 )
+		    block
+		s--
+	Removing a semaphore
+
+    Semaphore code
+        semget - <sys/types.h>, <sys/ipc.h>, <sys/sem.h>
+	
+	This is not the same as Up(S), the semaphore is not modified by
+	semget.
+	
+	Returns a semaphore descriptor or -1 (errno).
+	
+	semget( <KEY>, <AMOUNT>, <FLAGS> )
+	
+	    KEY
+	        Unique semaphore identifier (use ftok)
+            AAMOUNT
+	        Semaphores are actually stored as sets with possibly
+		many semaphores stored together. This parameter sets
+		the number of semaphores to create/get.
+		
+            FLAGS
+	        Includes permissions for the semaphore
+		
+		Combine with bitwise or
+		
+		IPC_CREAT: create the semaphore, will set value to 0.
+		IPC_EXCL: Fail if the semaphore already exists and
+			  IPC_CREAT is on.
+
+            Example
+	        int semd;
+		semd = semget( ftok("file/dir", 2), 1), 0644 | IPC_CREAT)
+
+		IPCS - command line utility
+
+12/8
+SOTD: TIme is Running Out - Muse
+Aim: What's a semaphore? - To control resources!
+
+Semaphore code
+    semctl - <sys/types.h> <sys/ipc.h> <sys/sem.h>
+    
+        Control the semaphore, including:
+
+	    Set the semaphore value
+	    Remove the semaphore
+	    Get the current value
+	    Get information about the semaphore
+
+    semctl( <DESCRIPTOR>, <INDEX>, <OPERATION>, <DATA> )
+    
+        DESCRIPTOR
+	    The return value of semget
+	
+	INDEX
+	    The index of the semaphore you want to control in the
+	    semaphore set identified by the descriptor.
+	
+	OPERATION
+	    One of the following constants (there are others as well)
+	    
+	    IPC_RMID: Remove the semaphore
+	    	      If you use this, you will not need <DATA> arg.
+	   
+	    SETVAL: Set the value. (Requires <DATA>)
+	    
+	    SETALL: Set the value of every semaphore in the set.
+	            (Requires <DATA>)
+		    
+	    GETALL: Return the value.
+	    
+	    IPC_STAT: Populate buffer with information about the
+	    	      semaphore. (Requires <DATA>)
+
+        DATA
+	    Variable for setting/storing information about the
+	    semaphore. (Data type: Union semun)
+
+	    EX) union un {
+	    	  int i;    //4
+		  char c;   //1
+		  double d; //8
+		};
+		
+		union un foo;
+		foo.i = S;      //sets first four bytes of foo.
+		foo.d = 185.36; //sets all 8 bytes of foo, overwriting.
+		foo.c = 'c';    //sets first byte as 'c', leaves the rest
+		
+		Union is only as large as the largest data inside.
+		Union is not all of these things at once, it is only
+		one of these things.
+		
+	    You have to declare this union in your main c file on linux
+	    machines.
+	    
+	    union semun {
+	        int val;
+		struct semid_ds *buf;
+		unsigned short  *array;
+		struct seminfo  *__buff;
+	    };
+	          val: used to set initial value
+		  buf: buffer for IPC_STAT
+int main(int argc, char **argv) {
+    
+    int key = ftok("makefile", 'b');
+    int semid;
+   
+    if (strcmp( argv[0], "-c" ) == 0 ) {
+        semid = semget( key, 1, 0644 | IPC_CREAT);
+	union semun su;
+	su.val = 3;
+	semctl( semid, 0, SETVAL, su );
+	printf("semaphore created: %d\n", semid);
+    }
+    
+    if (strcmp( arg[0], "-v" ) == 0) {
+        semid == semget( key, 1, 0644 );
+	int v;
+	v = semctl( semid, 0, GETVAL );
+	printf("semaphore value: %d\n", v);
+    }
+    
+    
+    if (strcmp( arg[0], "-R" ) == 0) {
+        semid == semget( key, 1, 0644 );
+	int v = semctl( semid, 0, IPC_RMID );
+	printf("semaphore removed\n");
+    }
+}
+
+12/7
+Aim: Turn down or up?
+
+Semaphore Code
+    semop
+        Perform semaphore operations (like Up/Down)
+	
+	All operations performed via semop are atomic!
+	
+	semop <DESCRIPTOR>, <OPERATION>, <AMOUNT>)
+	    DESCRIPTOR
+	        You know what this is
+	    AMOUNT
+	        The amount of semaphores you want to operate on in the
+		semaphore code
+	    	For a single semaphore set, 1
+	    OPERATION
+	        A pointer to a struct sembuf value
+		
+		struct sembuf { 
+		    short sem_op;
+		    short sem_num;
+		    short sem_flg;
+		};
+		
+		sem_num
+		    The index of the semaphore you want to work on.
+
+		sem_op
+		    -1: Down(S);
+		     1: Up(S);
+		        Any -/+ number will work, you will be requesting
+			and releasing that value from the semaphore.
+		     0: Block until the semaphore reaches 0.
+
+		sem_flg
+		    Provide further options
+		    
+		    SEM_UNDO: Allow the OS to undo the given operation.
+		    	      Useful in the event that a program exits
+			      before it could release a semaphore.
+		    IPC_NOWAIT: Instead of waiting for the semaphore to
+		    		be available, return an error.
+                    
+		    ex:
+			semid = 
+			
+		        struct sembuf sb;
+			sb.sem_num = 0;
+			sb.sem_flg = SEM_UNDO;
+			sb.sem_op = -1;
+			
+			semop( semid, &sb );
+			
+			to release semaphore:
+			sem_op = 1;
+			semop( semid, &sb );
+
+SOTD: Shinbone Alley/Hard to Exist - Spin Doctors
+Aim: Ceci n'est pas une pipe
+
+Pipe
+    A conduit between 2 separate processes.
+
+    a ------------> b
+    
+    Pipes have 2 ends, a read end and a write end.
+    
+    Pipes are unidirectional (A single pipe must be either read or write
+    only in a process).
+    
+    Pipes act just like files.
+    
+    You can transfer any data you like through a pipe using read/write.
+    
+    Unnamed pipes have no external identification (like a descriptor or
+    name).
+    
+    pipe - <unistd.h>
+        Create an unnamed pipe.
+	
+	Returns 0 if the pipe was created, -1 if not.
+
+	Opens both ends of the pipe as files.
+	
+	pipe( int descriptors[2] )
+	
+	    descriptors
+		Array that will contain the descriptors for each end of
+		the array.
+
+int main() {
+  int fds[2];
+  int f;
+  char line[100];
+    
+  pipe(fds);
+  f = fork();
+  if (f == 0) {
+    close( fd[0] );
+    float p = 123.347
+    fgets(line, sizeof(line), stdin );
+    write( fds[1], line, sizeof(line) );
+    close( fds[1] );
+  } 
+  else {
+    close( fd[1] );
+    float q;
+    read( fds[0], &line, sizeof(line) )
+  }
+  return 0;
+}
+
+You can do this kind of thing with processes in other computers
+    
+Named Pipes
+    Also known as FIFOs.
+    
+    Same as unnamed pipes except FIFOs have a name that can be used to
+    identify them via different programs.
+    
+    Keep in mind that like unnamed pipes, FIFOs are unidirectonal.
+    
+    mkfifo
+        Shell command to make a FIFO
+	$ mkfifo <pipe name>
+	
+	When you run cat mario, you will need to cat > mario from a
+	different terminal.
+	
+	If you send the end of file signal, it will close the pipe.
+	unless there is another cat program open.
+
+12/15
+SOTD: Tropicalia - Beck
+Aim: A pipe by any other name...
+
+Named Pipes
+   
+    mkfifo - <sys/types.h> <sys/stat.h>
+        
+	c function to create a FIFO
+	
+	Returns 0 on success and -1 on failure (errno)
+	
+	Once created, the FIFO acts like a regular file, and we can use
+	open, read, write, and close on it.
+
+	mkfifo( <name>, <permissions> )
+	
+	FIFOs will block on open until both ends of the pipe have a
+	connection.	
+
+SERVER:
+
+int main() {
+  int from_client;
+  int e;
+  char line[100];
+  
+  e = mkfifo( "mario", 0644 );
+  printf( "<server> pipe created &d\n", e );
+
+  from_client = open( "mario", O_RDONLY ); //This will block the program
+  printf( "<server> connection open\n" );
+
+  read( from_client, line, sizeof(line) ); //Blocks for information to
+  		     	   		   //be sent.
+  printf( "<server> read: [%s]\n", line ); 
+
+  close( from_client );
+  return 0;
+}
+
+When this is running, you will need to cat > mario in another terminal.
+
+New line is sent in when piping information from the terminal.
+
+Read does not take into account terminating nulls. You should include
+terminating nulls if you are sending strings through pipes.
+
+CLIENT:
+
+int main() 
+  
+  int to_server;
+  char line[100];
+  
+  to_server = open( "mario", O_WRONLY );
+  printf( "<client> connection opened\n" );
+  remove( "mario" ); //Added to prevent hijackers.
+
+  printf( "<client> enter stuff: " );
+  fgets( line, sizeof(line), stdin );
+
+  write( to_server, line, sizeof(line) );
+  close( to_server );
+  
+  return 0;
+}
+
+You can hijack the pipe if you run the client multiple times
+
+You can fix it by removing the actual pipe after the connection is
+established. --> This is where blocking is helpful.
+
+remove( <PATH> ); --> Removing files.
+
+IF you remake "mario", nothing will conflict. Any new pipe named mario
+will be totally separate.
+
+12/16
+SOTD: Cantaloop - US3
+      (Cantaloupe)
+Aim: Always remember to tip your servers
+
+   Server   	     	     Server ---
+     ^			       ^       | 7)
+ 2)  |			       |       v
+    ___	    ___		       |      ___
+   | W |   |   |	       |     |	 |
+1) | K |   | P | 3)   --->     | 6)  | P |
+   |_P_|   |___|      	       |     |___|
+     ^	     |		       |       |
+     | 4)    | 5)	       |       |
+   Client <--- 		     Client <---
+
+Server/Client Program Paradigms
+
+    Handshake
+        A procedure to ensure that a connection has been established.
+	
+	Both ends of the connection must verify that they can send and 
+	receive data to and from each other.
+	
+    	Basic Handshake Procedure:
+	    1) Server creates a named pipe (Well Known Pipe)
+	    2) Server waits for a connection	
+	    3) Client creates a "private" pipe
+	    4) Client connects to server and sends the private pipe name.
+	    5) Client waits for private pipe connection.
+	    6) Server receives client's message and removes the WKP.
+	    7) Server connects to client pipe, sending an initial
+	       acknowledgement message.
+	    8) Client receives server's message, removes its private
+	       pipe.
+
+Server Program:
+
+int server_handshake( int *from_client ) {
+    
+    int to_client;
+    char buffer[100];
+    
+    mkfifo( "mario", 0644 );
+    *from_client = open( "mario", O_RDONLY );
+
+    read( *from_client, buffer, sizeof(buffer) );
+    printf( "<server> connection request: [%s]\n", buffer );    
+
+    remove( "mario" );
+    to_client = open( buffer, O_WRONLY );
+    write( "message" );
+    
+    return to_client;
+}
+
+int main() {
+    
+    int to_client;
+    int from_client;
+    char buffer[100];
+     
+    while(1) {
+      printf("<server> waiting for connection\n" );
+      to_client = server_handshake( &from_client );      
+      while( read( from_client, buffer, sizeof(buffer) ) ) {
+        printf( "<server> received [%s]\n", buffer );
+	process( buffer );
+	write( to_client, buffer, sizeof(buffer) );
+	strncpy( buffer, "", sizeof(buffer) );   
+        close( to_client );
+      }
+    }
+    return 0;
+}
+
+========================================================================
+
+Client Program:
+
+int client_handshake( int *from_server ) {
+  
+  int to_server;
+  char buffer[100];
+
+  sprintf( buffer, "%d", getpid() ); //prints to buffer.
+  mkfifo( buffer, 0644 );
+
+  to_server = open("mario", O_WRONLY );
+  write( to_server, buffer, sizeof(buffer) );
+  
+  *from_server = open( buffer, O_WRONLY );
+  remove( buffer );
+  
+  read( *from_server, buffer, sizeof(buffer) );
+  printf( "<client> connection established: [%s]\n", buffer );
+  
+  return to_server; 
+}
+
+int main() 
+  int to_server;
+  int from_server;
+  char buffer[100];
+  
+  to_server = client_handshake( &from_server );
+  
+  while (1) {
+    printf( "<client> enter stuff: " );
+    fgets( buffer, sizeof(buffer), stdin );
+    *strchr( buffer, '\n' ) = 0;
+    write( to_server, buffer, sizeof(buffer) );
+    read( from_server, buffer, sizeof(buffer) );
+    printf( "<client> received: [%s]\n", buffer );
+  }
+  
+  close( to_server );
+  close( from_server );
+
+  return 0;
+}
+
+12/17
+SOTD: The Joker - Steve Miller Band
+Aim: You just got served!
+
+
+
+
+
+
+12/18
+SOTD: The last 8 songs on Abbey Road - The Beatles
+Aim: Sometimes you have to ask your server for another fork
+
+Basic Server
+    1) Basic Handshake
+    2) Server gets data from client, "processes" it, and sends back a
+       response.
+    3) Once the client exits, the server creates a new WKP, removes the
+       old client connections, and the steps restart.
+
+Forking Server
+    Main server forks off dedicated subservers for each client 
+    connection.
+    
+    Allows for multiple simultaneous clients.
+    
+    Handshake procedure is modified on the server:
+        1 - 6 are the same.
+
+	7) Server forks off a subserver.
+	
+	8) *Subserver* connects to client pipe, sending an initial
+	   acknowledgement message.
+	   
+	After the handshake:
+	
+	    Main server creates a new WKP and waits for a new client.
+	    
+    Central Dispatch Server
+        Main server handles all incoming connections.
+	
+	Subservers are forked off to handle outgoing connections.
+
+
+SOTD: Paranoid 
