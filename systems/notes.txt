@@ -2023,14 +2023,16 @@ Forking Server
 
 SOTD: Paranoid Android - Radiohead
 Aim: Cisco in an hour
-Do Now: What needs to happen in order for 2 computers to communicate with each
-   	other?
+Do Now: What needs to happen in order for 2 computers to communicate with
+   	each other?
 
 OSI 7-Layer Model
-    Used to help conceptualize the different parts of network connections.
+    Used to help conceptualize the different parts of network 
+    connections.
     
-    The top layer is the most concrete, with each subsequent layer becoming more
-    abstract (relying less on the physical connection and more on code).
+    The top layer is the most concrete, with each subsequent layer 
+    becoming more abstract (relying less on the physical connection and
+    more on code).
     
     The Layers:
     	1. Physical
@@ -2041,20 +2043,171 @@ OSI 7-Layer Model
 	6. Presentation
 	7. Application
 
-    If you are working on a particular layer, you should not have to think too
-    much about the other layers.
+    If you are working on a particular layer, you should not have to 
+    think too much about the other layers.
 
 Physical Layer
     How computers are physically connected.
     
-    Things like electrons running across wires, radio signals pulsing through the
-    air...
+    Things like electrons running across wires, radio signals pulsing
+    through the air...
     
     A brief history of wired connections
     
 	Thicknet
-	    A single Coaxial cable runs throughout the network, "vampire taps" go
-	    into the cable and leech the data out
+	    A single Coaxial cable runs throughout the network, "vampire
+	    taps" go into the cable and leech the data out
 	
 	Thinnet
 	    A single Coaxial cable runs throughout the network,
+
+
+SOTD: Virtual Insanity - Jamiroquai
+Aim: Cisco in an hour Part II: Electric Boogaloo
+
+Physical Layer
+
+    A brief history of wired connections
+
+    Thinnet
+        A single Coaxial cable runs throughout the network,
+	T-Junctions used to splice the connections
+	
+    In Thicknet and Thinnet, all data is sent to all computers
+    
+    Each computer added increases the power drain on the entire system,
+    degrading service.
+
+    Token Ring
+        Each computer is connected in a ring to each other.
+
+	Only one computer has command of the network resources at a time.
+    	This is called "having the token".
+	
+	The network sends a "token" throughout the ring, which contains
+	the identity of the computer with the token. All other computers
+	must wait to use the network.
+	
+	No possibility of collisions.
+
+    Ethernet
+        Multiple computers connect to a single hub or switch.
+
+   	Hub
+	    Broadcasts the data to all the computers.
+
+	Switch
+	    Sends data to a specific computer. (Needs to look at Data
+	    Link Layer)
+
+	The more computers you add to an ethernet network the greater the
+	chance of collision.
+
+SOTD: Break on Through - The Doors
+Aim: Cisco in an hour III: in 3-D!
+
+Data Link Layer (2)
+
+     Point-to-point transmission between devices on the same (local)
+     network.
+
+     Each device is given a  unique 6-byte MAC (Media Access Control)
+     address, this is set on each network card when they are made.
+
+     Data is packaged into frames
+     
+         Ethernet Frame:
+	 <prefix><dest><source><...><  data  ><checksum>
+	    8B     6B     6B     6B  46-1500B    4B
+
+	    prefix: 10101010 x7 + 10101011
+	    destination/source: MAC Addresses
+	    ...: Information about frame type
+	    checksum: To endure data integrity
+	    
+        MTU:
+	    Maximum Transmission Unit
+	    1500 byte for ethernet 
+
+SOTD: Bohemian Rhapsody - Queen
+Aim: Cisco in an hour IV: A New Hope
+
+Network Layer (3)
+    Transmission of data between two separate networks.
+    
+    Major features of this layer are addressing, routing, and packet
+    forwarding.
+    
+    Is not concerned with whether or not data was sent successfully
+    (Connectionless).
+
+    IP (Internet Protocol) addresses
+        IPv4: 4 byte address
+	    [0-255] . [0-255] . [0-255] . [0-255]
+
+SOTD: Mr. Jones - Counting Crows
+Aim: Cisco in an hour V: for Vandetta
+
+Network Layer (3)
+    IP (Internet Protocol) addresses
+        IPv4: 4 byte address
+            [0-255] . [0-255] . [0-255] . [0-255]
+	
+	Routing is made easier by having IP addresses distributed in
+	blocks.
+	
+        ARP
+	    Address Resolution Protocol
+	    Translates IP <--> MAC
+	    Handled by each individual network separately
+	    
+    
+SOTD: Space Oddity - David Bowie
+Aim: Cisco in an hour IV: The Undiscovered Country
+
+Network Layer (3)
+    Data is broken into packets
+    <header info><packet length><fragment info>
+          2B		2B	       4B 
+    <time-to-live><protocol><header checksum>
+          1B	      1B	    2B
+    <source><destination><...><data>
+       4B	  4B      4B   20 - 65,535B
+    
+    header info: packet type (IPV4/6), header length...
+    
+    fragment info: Full payloads may be broken up, this will have total 
+    # of fragments as well as which fragment the current packet contains.
+
+    time-to-live: Maximum # of hops before the packet dies (dropped).
+    
+    protocol: TCP/UDP/...
+
+    ...: optional informationn depending on type of packet.
+
+    IP MPU is 65,535B
+
+    IPv6
+        Now 20 years old!
+
+	Designed to overcome the limitations of IPv4.
+	
+	Address space goes from 2^32 to 2^128.
+	
+	Addresses are writeen as 8 groups of 4 hexadecimal digits.
+
+	87ab : 301c : b251 : ...
+	
+	All existing IPv4 addresses an be written like this:
+	
+	0000 : 0000 : 0000 : ffff : 149.89.150.100
+
+    MPU
+        ~4.3 billion (2^32)
+	Also referred to as jumbograms
+
+Transport Layer (4)
+
+    Computer to computer connrtion over multiple networks.
+    
+    Unconcerned with the individual hops of layer 3 traffic.
