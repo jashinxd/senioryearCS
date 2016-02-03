@@ -1,0 +1,43 @@
+2/3
+Image File Formats
+Compressed v. Uncompressed
+    Compressed
+	Smaller
+    	Processing involved in viewing/generating a file
+    	EX)
+	    jpg/jpeg
+	    webp
+	    png
+	    gif
+
+    Uncompressed
+        Raw image data
+        EX)
+	    bmp
+	    tiff
+	    raw
+
+Lossy v. Lossless
+    Lossy
+        Loses some original information
+        EX)
+	    jpg
+    Lossless
+        Retains all original information
+	EX)
+	    bmp
+	    tiff
+	    png
+
+    Run-Length Encoding
+        12 B --> GGGGGYYYRRRR
+        6  B --> 5G3Y4R
+
+	6  B --> GYRYGR
+	12 B --> 1G1Y1R1Y1G1R
+
+Raster v. Vector
+    Raster
+        Represented as a grid of pixels
+    Vector
+        Represented as a list of drawing instructions
