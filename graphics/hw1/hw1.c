@@ -7,11 +7,10 @@ int main() {
   char * img;
   sprintf(img, %s, "P3\n500 500 255");
   write(fd, img, strlen(line));
-  int i = 0;
-  int j = 0;
-  for (i = 0; i < 500; i++) {
-    for (j = 0; j < 500; j++) {
-      char r = ;
+  int x, y, r, g, b;
+  for (y = 0; y < 500; y++) {
+    for (x = 0; x < 500; x++) {
+      r = ;
       char g;
       char b;
     }
