@@ -26,5 +26,6 @@ int main() {
       write(fd, line, strlen(line));
     }
   }
+  close(fd);
   return 0;
 }

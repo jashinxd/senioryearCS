@@ -1,0 +1,50 @@
+2/5
+Aim: Canvassing the nabe with DOM and HTML5
+DN: Engage your imagination, and put thoughts to paper...
+    The year is 1995. You are a HS senior.
+    a) What are you wearing?
+       Baggy Jeans, Neon colors, Timberland boots, Flannels
+    b) What does your CD collection look like?
+       Britney Spears, Gwen Stefani, Nirvana, Backstreet Boys, 'NSync
+    c) What is the state of the internet?
+       13 million users, not that many websites. Dial Up - 60kb/s down.
+    d) What does your webpage look like?
+       Pure HTML, no CSS, JS, fancy styling.
+
+    www.angelfire.com/super/badwebs/
+
+    Q: Cornerstone of www?
+    A: Hyperlink - Not static, dynamic!
+
+    Browser Wars
+    Netscape
+    IE
+
+    Netscape -> JavaScript
+    IE -> JScript 
+    
+    AOL
+
+    Late 90's: Enter the DOM
+    W3C (World Wide Web Consortion) forms, introduces
+    
+    Document Object Model
+    * Organizes components of a webpage as a tree.
+    * Provides API for languages like JS to access page elements.
+    
+    The big short
+
+			Document
+			   |
+       			   v
+      			  HTML
+			 /    \
+			 v    v
+		       HEAD   BODY  
+          	        |     /  \
+			v    h1  P
+		     Title
+    <html>
+    <head>
+      <title>mmmkay</title>
+    </head>
