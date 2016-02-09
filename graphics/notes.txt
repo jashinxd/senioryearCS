@@ -99,4 +99,78 @@ Check to see which magnitude is smaller.
 DONT DO THIS - test the midpoint instead.
 Midpoint -- if midpoint is above the line, draw the lower pixel
 	    if midpoint is below the line, draw the higher pixel.
-	    -(x + 1 ,y + 1/2)
+	    (x + 1, y + 1/2)
+
+2/9
+
+A = changeX
+B = -changeX
+C = changeX * b
+
+f(x + 1, y + 1/2)
+= 0 --> midpoint is on the line --> You can draw either pixel.
+< 0 --> midpoint is above the line --> Draw the bottom pixel (x + 1, y)
+> 0 --> midpoint is below the line --> Draw the upper pixel(x + 1, y + 1)
+
+First Draft Algorithm
+(x0, y0) --> (x1, y1)
+x = x0, y = y0
+while (x <= x1) {
+  plot(x, y)
+  delta = f(x + 1, y + 1/2) //You need to know A, B, and C
+  if (d > 0) {
+     y += 1;
+  }
+  x += 1;
+
+Initial value of d:
+d = (f0 + 1, y0 + 1/2)
+d = A(x0) + B(y0 + 1/2) + C
+d = Ax0 + A + By0 + B/2 + C
+  = Ax0 + By0 + C + A + B/2
+  = f(x0, y0) + A + B/2
+  = 0 + A + B/2
+  = A + B/2 --> Works because x0 y0 is used.
+
+Second Draft Algorithm
+(x0, y0) --> (x1, y1)
+x = xn, y = yn
+d = A + B/2
+while (x <= x1) {
+  plot(x, y)
+  if (d > 0) {
+     y += 1;
+  }
+  x += 1;
+  d = f(x + 1, y + 1/2)
+
+if d < 0			 
+x -> x + 1, y -> y			 
+f(x + 1, y)
+d = A(x + 1) + By + C
+d = Ax + A + By + C
+d = Ax + By + C + A
+d = f(x, y) + A
+d = d + A because f(x, y) is previous d.
+
+if d > 0
+x -> x + 1, y -> y + 1			 
+f(x + 1, y + 1)
+d = A(x + 1) + B(y + 1) + C
+d = Ax + A + By + B + C
+d = Ax + By + C + A + B
+d = f(x, y) + A + B
+d = d + A + B because f(x, y) is previous d.
+
+Third Draft Algorithm
+(x0, y0) --> (x1, y1)
+x = xn, y = yn
+d = A + B/2
+while (x <= x1) {
+  plot(x, y)
+  if (d > 0) {
+     y += 1;
+     d += B;
+  }
+  x += 1;
+  d += A;

@@ -50,3 +50,26 @@ DN: Engage your imagination, and put thoughts to paper...
     </head>
 
 2/9
+Aim: Same as F
+Do Now: What did advent of DOM achieve? What NOT?
+   	It brought about a standard to the way HTML was set up and 
+	scripts interacted with the HTML.
+
+Web v1.0 - Static, Consume as a user
+Web v2.0 - Dynamic, Post content.
+
+NO FLASH on iOS
+
+HTML5 - introduced to HTML the possibility to add multimedia.
+
+Pair Programming:
+1 keyboarder, 1 co-driver, 2 thinkers
+
+HTML: <canvas height="500" width="300" id="c">
+      </canvas>
+
+canvas.js:
+      var c = document.getElementByID("c");
+      var ctx = c.getContext("2d");
+
+	 
