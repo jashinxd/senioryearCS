@@ -70,3 +70,33 @@ Netppm
 
     display pic.ppm
     convert pic.ppm pic.png
+
+2/5
+Bresenham's Line Algorithm
+y = m * x + b
+y = (changeY/changeX) * x + b
+(changeX) * y = (changeY) * x + (changeX) * b
+0 = (changeY) * x - (changeX) * y + (changeX) * b
+
+A = changeY
+B = -changeX
+C = changeX * b
+
+0 = Ax + By + C
+
+For now, limit lines to octant I. Therefore, 0 < m < 1.
+
+f(x, y) = Ax + By + C
+
+  0: (x, y) is on the line.
+< 0: (x, y) is above the line.
+> 0: (x, y) is below the line.
+
+2 options:
+1: (x + 1, y + 1)
+2: (x + 1, y)
+Check to see which magnitude is smaller.
+DONT DO THIS - test the midpoint instead.
+Midpoint -- if midpoint is above the line, draw the lower pixel
+	    if midpoint is below the line, draw the higher pixel.
+	    -(x + 1 ,y + 1/2)
