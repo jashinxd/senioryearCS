@@ -87,4 +87,35 @@ HW Server:
   Canvas with ID: "ftb2maga"
   Dimenstions: 538 x 538
   
-  jso123450
+2/11
+Paths used to draw arbitrary shapes, including circles and curves
+* A context can keep track of one path at a time.
+* The path is not drawn until stroke() is called
+* A path is considered done when a new beginPath() is called.
+
+beginPath()
+    Starts or resets current path
+
+moveTo(X, Y)
+    Moves path to position (x, y)
+    Does not result in a line or a filled in section
+
+lineTo(X, Y)
+
+clearRect(
+
+Task:
+    dotconn.js
+
+    canvas id: "playground"
+
+    button id: "clear"
+
+    Draws a connected series of dots by adding 1 dot per user click (at click
+    location)
+
+    button.addEventListener("click", <fxn>);
+    
+    clearRect(_,_,_,_);
+
+    ssh into 149.89.160.(101-105)

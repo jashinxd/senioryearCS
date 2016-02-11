@@ -1,0 +1,4 @@
+/*------------------------JAVSCTIPT-------------------*/
+console.log("Javascript loaded");
+var c = getElementById("playground");
+var ctx = c.getContext("2d");
