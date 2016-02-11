@@ -72,4 +72,19 @@ canvas.js:
       var c = document.getElementByID("c");
       var ctx = c.getContext("2d");
 
-	 
+
+2/10
+HW Server:
+  Login
+  Update Profile
+  Change Password
+  Close Browser, Reopen, Test
+  Upload
+    index.html
+    canvas.js
+
+  index.html
+  Canvas with ID: "ftb2maga"
+  Dimenstions: 538 x 538
+  
+  jso123450

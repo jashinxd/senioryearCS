@@ -124,8 +124,8 @@ while (x <= x1) {
   x += 1;
 
 Initial value of d:
-d = (f0 + 1, y0 + 1/2)
-d = A(x0) + B(y0 + 1/2) + C
+d = (x0 + 1, y0 + 1/2)
+d = A(x0 + 1) + B(y0 + 1/2) + C
 d = Ax0 + A + By0 + B/2 + C
   = Ax0 + By0 + C + A + B/2
   = f(x0, y0) + A + B/2
@@ -164,7 +164,8 @@ d = d + A + B because f(x, y) is previous d.
 
 Third Draft Algorithm
 (x0, y0) --> (x1, y1)
-x = xn, y = yn
+x = x0, y = y0
+A = y1 - y0, B = -(x1 - x0)
 d = A + B/2
 while (x <= x1) {
   plot(x, y)
@@ -174,3 +175,71 @@ while (x <= x1) {
   }
   x += 1;
   d += A;
+
+2/10
+ d = A + B
+2d = 2A + B
+
+Now, instead of d, use...
+2d = 2d + 2A
+2d = 2d + 2A + 2B
+
+Final Algorithm
+(x0, y0) --> (x1, y1)
+x = x0, y = y0
+A = y1 - y0, B = -(x1 - x0)
+d = 2A + B
+while (x <= x1) {
+  plot(x, y)
+  if (d > 0) {
+     y += 1;
+     d += 2B;
+  }
+  x += 1;
+  d += 2A;
+
+Octant 2:
+Slope > 1
+Now, new values will be either...
+  (x, y + 1) or
+  (x + 1, y + 1)
+
+  Now, midpoint we want to check is (x + 1/2, y + 1).
+
+  Initial d:
+  d = (x0 + 1/2, y0 + 1)
+  d = A(x0 + 1) + B(y0 + 1/2) + C
+  d = Ax0 + A/2 + By0 + B + C
+    = Ax0 + By0 + C + A + B
+    = f(x0, y0) + A/2 + B
+    = 0 + A/2 + B
+    = A/2 + B --> Works because x0 y0 is used.
+  2d = A + 2B
+
+  If Ax + By + C = ...
+  0, point on the line
+  <0, point left of line
+  >0, point right of line
+
+  Final Algorithm
+  (x0, y0) --> (x1, y1)
+  x = x0, y = y0
+  A = y1 - y0, B = -(x1 - x0)
+  d = A + 2B  //midpoint is different
+  while (y <= y1) { //change in Y will indicate reaching final point
+    plot(x, y)
+    if (d < 0) { //d < 0, point left of line, so draw line up and right.
+      x += 1; //increment to go right
+      d += 2A; //increment A instead of B
+    }
+    y += 1; //increment to go up
+    d += 2B; //Increment B instead of A
+
+For octant V, you can simply switch x0 and y0 and x1 and y1, and now
+it is just like drawing in octant I. DO NOT SWITCH ONLY ONE, SWAP BOTH.
+
+Octant VIII:
+-1 < m < 0
+Now, new values will be either...
+  (x + 1, y) or
+  (x + 1, y - 1)
