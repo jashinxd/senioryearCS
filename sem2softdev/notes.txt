@@ -111,11 +111,15 @@ Task:
 
     button id: "clear"
 
-    Draws a connected series of dots by adding 1 dot per user click (at click
-    location)
+    Draws a connected series of dots by adding 1 dot per user click
+    (at click location)
 
     button.addEventListener("click", <fxn>);
     
     clearRect(_,_,_,_);
 
     ssh into 149.89.160.(101-105)
+
+2/13
+Code source: a. homer.stuy.edu/~tofr/dots
+     	     b. research

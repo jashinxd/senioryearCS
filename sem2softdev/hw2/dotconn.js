@@ -39,6 +39,9 @@ var makeDot = function(e) {
 var clear = function(e) {
     e.preventDefault();
     ctx.clearRect(0, 0, c.width, c.height);
+    // When cleared, makes prevX and prevY 0.
+    prevX = 0;
+    prevY = 0;
 }
 
 // Adds events to canvas and button
