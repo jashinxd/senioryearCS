@@ -243,3 +243,46 @@ Octant VIII:
 Now, new values will be either...
   (x + 1, y) or
   (x + 1, y - 1)
+
+2/22
+Using Matrices:
+
+  Point Matrix:
+  [P0 P1 P2 P3 P4 P5 P6]
+
+  while (i < points.length - 1) {
+    draw_line(points[i], points[i + 1]);
+    i++;
+  }
+
+  Not what we want.
+
+  1. Shape Matrix:
+     [[P0, P1, P2], [P3, P4, P5, P6]]
+  
+  2. [P0, P1, P2, P0, 0, P3, P4, P5, P6, P3, 0]
+
+  ** 3. Edge Matrix:
+       [P0, P1, P1, P2, P2, P0,...]
+
+  4. Have 2 Matrices:
+       Point Matrix:
+       [P0, P1, P2, P3]
+       Connection Matrix:
+         0  1  2  3
+       0 T  T  T  F
+       1 T  T  T  F
+       2 T  T  T  F
+       3 F  F  F  T
+  
+  [P0, P1, P1, P2, P2, P0, P3, P4]
+
+  [X0, X1, X1, X2, X2, X0, X3, X4]
+  [Y0, Y1, Y1, Y2, Y2, Y0, Y3, Y4]
+  [Z0, Z1, Z1, Z2, Z2, Z0, Z3, Z4]
+  [ 1,  1,  1,  1,  1,  1,  1,  1]
+
+  edges = new_matrix()
+  add_edge(edges, P0, P1)
+  ...
+  draw_lines(edges)
