@@ -120,6 +120,13 @@ Task:
 
     ssh into 149.89.160.(101-105)
 
-2/13
+2/12
 Code source: a. homer.stuy.edu/~tofr/dots
      	     b. research
+
+2/22
+Useful:
+    window.requestAnumationFrame(<fxn>)
+
+* Tells browser to run specified fxn before drawing next frame
+* Allows browser to handle when code should be executed.
