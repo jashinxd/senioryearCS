@@ -286,3 +286,54 @@ Using Matrices:
   add_edge(edges, P0, P1)
   ...
   draw_lines(edges)
+
+2/23
+Matrix Math
+  Scalar Multiplication
+  Matrix Multiplication
+  Matrix Multiplication Identity
+
+Scalar Multiplication
+  S * [A B] = [SA SB]
+      [C D] = {SC SD]
+
+Matrix Multiplication
+  M0 * M1 != M1 * M0
+  Number of columns in M0 must equal the number of rows in M1
+    A x B * B x C ==> inner numbers must be equal.
+      	      	  ==> Outer numbers represent the result matrix size. (A x C)
+		      A rows, C columns
+		      
+  [a b c] * [1] = [1a+2b+3c]
+    1x3     [2]      1x1
+    	    [3]
+	    3x1
+
+               0 1           0         1
+  0 [a b c] * [1 4] = 0 [1a+2b+3c  4a+5b+6c] 
+  1 [d e f]   [2 5]   1 [1d+2e+3f  4d+5e+6f]
+  2 [g h i]   [3 6]   2 [1g+2h+3i  4g+5e+6i]
+    3x3        3x2              3x2
+
+Matrix Multiplicative Identity
+  All diagonal values are 1, others are zero.
+  Always square.
+
+  [1 0 0 0] * [a]
+  [0 1 0 0]   [b]
+  [0 0 1 0]   [c]
+  [0 0 0 1]   [d]
+     4x4      4x1
+
+Graphics Matrices
+  Scaling
+    (x, y, z) -------> (ax, by, cz)
+    	      S(a,b,c)
+	
+    [a 0 0 0] * [x] = [ax]
+    [0 b 0 0]   [y]   [by]
+    [0 0 c 0]   [z]   [cz]
+    [0 0 0 1]   [1]   [1 ]
+       4x4      4x1   4x1
+
+       4x4 * 4xN = 4xN ==> Keeps the same number of points.
