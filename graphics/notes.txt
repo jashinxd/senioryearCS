@@ -337,3 +337,51 @@ Graphics Matrices
        4x4      4x1   4x1
 
        4x4 * 4xN = 4xN ==> Keeps the same number of points.
+
+2/24
+Scaling
+  (x, y, z) --------> (ax, by, cz)
+      	    s(a,b,c)
+
+     x y z
+    [a 0 0 0] * [x] = [ax]
+    [0 b 0 0]   [y]   [by]
+    [0 0 c 0]   [z]   [cz]
+    [0 0 0 1]   [1]   [1 ]
+       4x4      4x1   4x1
+
+       4x4 * 4xN = 4xN ==> Keeps the same number of points.
+
+Translating
+  (x, y, z) --------> (x + a, y + b, z + c)
+      	    T(a,b,c)
+
+    [1 0 0 a] * [x] = [x + a]
+    [0 1 0 b]   [y]   [y + b]
+    [0 0 1 c]   [z]   [z + c]
+    [0 0 0 1]   [1]   [1]
+
+Rotation
+  (x, y, z) ----------> (?, ?, z)
+      	    R(z, Θ)
+
+  x = r cos Φ  xr = r cos (Φ + Θ)
+  y = r sin Θ       r cos (Φ) cos (Θ) - r sin (Φ) sin (Θ)
+      	    	    x cos (Θ) - y sin (Θ)
+
+  x = r cos Φ  yr = r sin (Φ + Θ)
+  y = r sin Θ       r sin (Φ) cos (Θ) + r cos (Φ) sin (Θ)
+      	    	    y cos (Θ) + x sin (Θ)
+
+    [cos sin 0 0] * [x] = [xcos - ycos]
+    [sin cos 0 0]   [y]   [ycos + xsin]
+    [0   0   1 1]   [z]   [z]
+    [0   0   0 0]   [1]   [1]
+  |
+  |  
+  |  
+  |
+  |
+  ------------
+
+  The axis you are turning around is fixed.
