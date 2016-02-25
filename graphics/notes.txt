@@ -362,26 +362,75 @@ Translating
     [0 0 0 1]   [1]   [1]
 
 Rotation
-  (x, y, z) ----------> (?, ?, z)
+  (x, y, z) -------> (x cos (Θ) - y sin (Θ), y cos (Θ) + x sin (Θ), z)
       	    R(z, Θ)
 
-  x = r cos Φ  xr = r cos (Φ + Θ)
-  y = r sin Θ       r cos (Φ) cos (Θ) - r sin (Φ) sin (Θ)
-      	    	    x cos (Θ) - y sin (Θ)
-
-  x = r cos Φ  yr = r sin (Φ + Θ)
-  y = r sin Θ       r sin (Φ) cos (Θ) + r cos (Φ) sin (Θ)
-      	    	    y cos (Θ) + x sin (Θ)
-
-    [cos sin 0 0] * [x] = [xcos - ycos]
-    [sin cos 0 0]   [y]   [ycos + xsin]
-    [0   0   1 1]   [z]   [z]
-    [0   0   0 0]   [1]   [1]
-  |
-  |  
-  |  
-  |
-  |
-  ------------
-
   The axis you are turning around is fixed.
+
+  Z axis rotation:
+    x = r cos Φ  xr = r cos (Φ + Θ)
+    y = r sin Θ       r cos (Φ) cos (Θ) - r sin (Φ) sin (Θ)
+        	      x cos (Θ) - y sin (Θ)
+
+    x = r cos Φ  yr = r sin (Φ + Θ)
+    y = r sin Θ       r sin (Φ) cos (Θ) + r cos (Φ) sin (Θ)
+        	      y cos (Θ) + x sin (Θ)
+
+    [cosΘ -sinΘ 0   0] * [x] = [xcosΘ - ycosΘ]
+    [sinΘ cosΘ  0   0]   [y]   [ycosΘ + xsinΘ]
+    [0    0     1   0]   [z]   [z]
+    [0    0     0   1]   [1]   [1]
+
+
+
+2/25
+  X axis rotation:
+    (x, y, z) -------> (x, y cos (Θ) - z sin (Θ), z cos (Θ) + y sin (Θ))
+    	      R(x, Θ)
+  In this case, y is on the x axis, z is on the y axis
+
+    [1	0      0    0] * [x] = [x]
+    [0  cosΘ  -sinΘ 0]   [y]   [ycosΘ - zsinΘ]
+    [0  sinΘ   cosΘ 0]   [z]   [zcosΘ + ysinΘ]
+    [0  0      0    1]   [1]   [1]
+
+  Y axis rotation:
+    (x, y, z) -------> (x cos (Θ) - z sin (Θ), y , z cos (Θ) + x sin (Θ))
+    	      R(Y, Θ)
+  In this case, x is on the x axis, z is on the y axis
+
+    [cosΘ 0     -sinΘ 0] * [x] = [xcosΘ - zsinΘ]
+    [0    1      0    0]   [y]   [y]
+    [sinΘ 0      cosΘ 0]   [z]   [xsinΘ + zcosΘ]
+    [0    0      0    1]   [1]   [1]
+
+Applying transformations:
+  E0: Edge Matrix
+  T: Translation Matrix
+  S: Scale Matrix
+  R: Rotation Matrix
+
+  Affine transformation: Preserves the number of vertices and order of points.
+
+  T * E0 --> You do this so you preserve the 4 x N edge matrix.
+
+  T * E0 = E1 : Translated
+  S * E1 = E2 : Translated --> Scaled
+  R * E2 = E3 : Translated --> Scaled --> Rotated
+
+  E3 = R * E2
+       	   S * E1
+	       T * E0
+  E4 = R * S * T * E0 --> You can put this all in one line.
+
+  Matrix Multiplication is associative but not commutative.
+       A * (B * C) = (A * B) * C
+
+  E4 = (R * S * T) * E0 --> By grouping the transformations together, you can create
+       	      	     	    a "master transformation" matrix, then multiply it by
+			    the edge matrix. You do this because E0 can be large.
+			    *** E0 is translated, scaled, THEN rotated ***
+			    *** Work from inside to out ***
+
+  When resetting your transformation matrix, you set it to the identity matrix.
+  
