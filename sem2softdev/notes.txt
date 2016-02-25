@@ -130,3 +130,48 @@ Useful:
 
 * Tells browser to run specified fxn before drawing next frame
 * Allows browser to handle when code should be executed.
+
+2/25
+XML:
+  eXtensible Markup Language:
+    A markup language that defines a set of rules for encoding documents in a 
+    format which is both human-readable and machine-readable.
+
+    * Not a formatting language (like HTML).
+    * Framework for creating markup based grammars.
+    * Uses some syntactic standards of HTML (tags, attributes).
+    * Focus on sorting and representing data instead of rendering or displaying it.
+    * an XML namespace is defined by the tags and attributes associated with a
+      specific XML language.
+
+...like SVG:
+  * Scalable Vector Graphics
+  * Vector image format
+  * XML-Based
+  * an SVG image and its actions are defined in XML text files.
+  
+  Vector graphics are images that are not represented as a 2d grid of pixels 
+  (raster) but instead as a list of drawing commands (like line, circle, rectangle,
+  curve,...).
+  
+  Biggest advantage to vector graphics is that they are scalable any size without
+  resulting in pixelation.
+  
+  the <svg> element is designed to store SVG code (that is, SVG XML elements)
+  
+    <svg xmlns="https://www.w3.org/2000/svg">
+      <SVG CODE HERE
+    </svg>
+    
+    xmlns
+      Attribute that identifies the namespace for the specific XML language being
+      used.
+
+    Creating SVG elements in javascript
+      document.createElementsNS(<NAMESPACE IDENTIFIER>, <ELEMETNT>);
+        creates an element from a specidfied XML namespace
+	svg example:
+	  var c1 = document.createElementNS("https://www.w3.org/2000/svg", circle);
+	  c1.setAttribute("cx", "200");
+		      
+
