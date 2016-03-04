@@ -178,3 +178,12 @@ XML:
 Aim: What's yer Vector Victor? And now? And now?
 DN: Original seats. Reboot.
 
+
+
+<svg xmlns="https://www.w3.org/2000/svg">
+xmlns:xlink="http://www.w3.org/1999/xlink"
+width="200" height="200">
+<image x="90" y="65" width="128" height="146" xlink:href=path/>
+</svg>
+
+message yicheng about our group.
