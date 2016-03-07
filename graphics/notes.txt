@@ -433,4 +433,64 @@ Applying transformations:
 			    *** Work from inside to out ***
 
   When resetting your transformation matrix, you set it to the identity matrix.
+
+
+3/7
+Parametric Equations
+  x = f(t)
+  y = g(t)
+
+  EX) f(t) = t^2 + 2t + 2
+      g(t) = 1 - t/(2^t)
+
+    t: 0 --> 1
+
+  Line: (x0, y0) --> (x1, y1)
+  f(t) = x0 + t(deltaX)
+  g(t) = y0 + t(deltaY)
+
+  double x0, y0, x, y, t;
+  x0 = param_x(0);
+  y0 = param_y(0);
+
+double param_x(double t) {
+  return t * XRES;
+}
+
+double param_y(double t) {
+  return 50 * sin(2 * M_PI * t) + 250;
+}
+
+  double step = 0.01
+
+  for (t = step; t <= 1; t+= step) {
+    x = param_x(t)
+    y = param_y(t)
+    add_edge(edges, x0, y0, 0, x, y, 0);
+    x0 = x;
+    y0 = y;
+  }
+
+  color c;
+  c.red = 255;
+  c.blue = 255;
+  c.green = 0;
+  clear_screen(s);
+  draw_lines(edges, s, c);
+  display(screen);
+}
+
+Circle:
+  x = rcos(t) + cx
+  y = rsin(t) + cy
+
+double param_x(double t) {
+  return 100 * cos(2 * M_PI * t) + 250;
+}
+
+double param_y(double t) {
+  return 100 * sin(2 * M_PI * t) + 250;
+}
+
+by changing the step, you will make different regular polygons.
   
