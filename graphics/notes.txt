@@ -463,7 +463,7 @@ double param_y(double t) {
 
   double step = 0.01
 
-  for (t = step; t <= 1; t+= step) {
+  for (t = step; t <= 1.0000001; t+= step) {
     x = param_x(t)
     y = param_y(t)
     add_edge(edges, x0, y0, 0, x, y, 0);
@@ -494,3 +494,26 @@ double param_y(double t) {
 
 by changing the step, you will make different regular polygons.
   
+3/8
+Spline
+
+Hermite Curve Inputs:
+P0, P1: Endputs
+R0, R1: Rates of change at each endpoint
+
+All we care about in graphics is creating cubic curves. In order to create
+higher order curves, just join two splines together.
+
+Hermite Curves:
+  fx(t) = at^3 + bt^2 + ct + d: Points on the curve.
+    You need to do this another time for y component.
+
+  f'(t) = 3at^2 + 2bt + c: Rates of change.
+
+  When t = 0
+    f(t) = d  : P0
+    f'(t) = c : R0
+
+  When t = 1
+    f(t) = a + b + c + d : P1
+    f'(t) = 3a + 2b + c  : R1
