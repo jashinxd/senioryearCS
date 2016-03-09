@@ -517,3 +517,65 @@ Hermite Curves:
   When t = 1
     f(t) = a + b + c + d : P1
     f'(t) = 3a + 2b + c  : R1
+
+3/9
+Hermite Curves
+Inputs: P0, P1\
+	       ---> at^3 + bt^2 + ct + d
+	R0, R1/
+
+
+   [0  0  0  1]   [a]    [d]                [P0]
+   [1  1  1  1]   [b]    [a + b + c + d]    [P1]
+   [0  0  1  0] * [c]  = [c]             =  [R0]
+   [3  2  1  0]   [d]    [3a + 2b + c]      [R1]  
+        H          C        Given           Given
+
+H * C = G
+
+H^-1 * H * C = H^-1 * G
+           C = H^-1 * G
+
+ [2  -2   1  1] * [P0] = [a]
+ [-3  3  -2  1]   [P1]   [b]
+ [0   0   1  0]   [R0]   [c]
+ [1   0   0  0]   [R1]   [d]
+
+REMEMBER: You have to do this twice for both X and Y axes.
+
+Bezier Curves
+Inputs: P0, P3: Endpoints
+	P1, P2: Not on curve.
+
+   P1 	    	    P2
+    *               *
+     \		     \
+      \  	      \
+       \	       \
+        *               *
+	P0		P3  (curve goes from P0 to P3)
+
+Linear BC
+P(t) = (1 - t) * P0 + t * P1
+                ----* P1  (curve goes from P0 to P1)
+          ------
+     -----
+    *
+    P0
+    
+Quadratic BC
+        P1
+        *
+      /   \	
+     /     \
+    /	    \
+   /	     \
+  /	      \
+ *	       *
+P0		P2 (wiki Bezier Curve)
+
+
+
+
+
+
