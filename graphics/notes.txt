@@ -574,8 +574,41 @@ Quadratic BC
  *	       *
 P0		P2 (wiki Bezier Curve)
 
+3/10
+Bezier Curves
+at^3 + bt^2 + ct + d
 
+Linear:
+P(t) = (1 - t) * P0 + t * P1
 
+Quadratic
+Quadratic BC
+        P1
+        /*\
+       /   \	
+      /     \
+     / _____-\*R1
+ R0*/--       \
+   /	       \
+  *	        *
+ P0		P2 (wiki Bezier Curve)
 
+R(t) = (1 - t) * R0 + t * R1
+R0(t) = (1 - t) * P0 + t * P1
+R1(t) = (1 - t) * P1 + t * P2
 
+R(t) = (1 - t) *           R0       +      t      *     R1
+R(t) = (1 - t) * [(1 - t) * P0 + t * P1] + t * [(1 - t) * P1 + t * P2]
+     = (1 - t)^2 * P0 + t * (1 - P) + t * (1 - P) + t^2 * P2
+R(t) = (1 - t)^2 * P0 + 2 * t * (1 - t) * P1 + t^2 * P2
 
+Cubic
+ --> For Gif, look on wiki for Bezier Curve
+
+Q(t) = (1 - t) * Q0 + t * Q1
+Q(t) = (1 - t) * [(1 - t)^2 * P0 + 2 * t * (1 - t) * P1 + t^2 * P2] +
+             t * [(1 - t)^2 * P1 + 2 * t * (1 - t) * P2 + t^2 * P3]
+Q(t) = (1 - t)^3 * P0 + 2 * t * (1 - t) ^2 P1 + t^2 * (1 - t) * P2 + t * (1 - t)^2 P1 + 2t^2(1 - t) * P3 + t^3 * P3
+Q(t) = (1 - t)^3 * P0 + 3 * t * (1 - t) ^2 P1 + 3t^2(1 - t) * P2 + t^3 * P3
+
+at^3 + bt^2 + ct + d
