@@ -187,3 +187,45 @@ width="200" height="200">
 </svg>
 
 message yicheng about our group.
+
+3/18
+Selectors
+Like jquert, you can select DOM elements using d3 functions
+d3.select(<IDENTIFIER>); --> returns first
+d3.selectAll(<IDENTIFIER>); --> returns array
+
+So why d3?
+
+After selecting an element, you can change attributes...
+
+...and and AND!! also pass functions to set the values dynamically:
+
+d3.selectAll("p")
+    .style("font-size", 
+        function() {
+            return Math.floor(Math.random() * 15) + "px"
+
+
+var data = [4, 8, 15, 16, 23, 42]
+data
+var chart = d3.select(".chart");
+chart
+var bar = chart.selectAll("div");
+bar
+var barUpdate = bar.data(data);
+barUpdate
+var barEnter = barUpdate.enter().append("div");
+
+d --> indicates 
+
+barEnter.style("width", function(d) {
+    return d * 10 + "px"; });
+}
+
+label each bar.
+barEnter.text(function(d) { return d; });
+
+
+Enter selection:
+Collection of placeholder nodes for each data element for which no corresponding
+existing DOM element was found.
