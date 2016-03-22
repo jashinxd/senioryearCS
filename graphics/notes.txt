@@ -642,3 +642,27 @@ for t: 0.1 --> 1
   add_edge (x0, y0, x, y, edges)
   x0 = x
   y0 = y
+
+3/21
+3D Shapes:
+  Box
+  Sphere
+  Torus
+  Bezier/Hermite Surfaces
+
+  Box:
+    8 vertices
+    Inputs: width, height, depth
+     	    x, y, z
+    Use the upper left front corner as starting point.
+    Simply add and subtract to get the desired result.
+
+  Sphere
+    Draw points on the sphere, connect latitudes and longitudes.
+    Rotate the circle, points along circumference will carve out a sphere.
+3/22
+3D Shapes
+  [r * cos(Θ)]
+  [r * sin(Θ)]
+  [    0     ]
+  [    1     ]
