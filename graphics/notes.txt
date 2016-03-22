@@ -662,7 +662,48 @@ for t: 0.1 --> 1
     Rotate the circle, points along circumference will carve out a sphere.
 3/22
 3D Shapes
-  [r * cos(Θ)]
-  [r * sin(Θ)]
-  [    0     ]
-  [    1     ]
+
+  Sphere:
+
+    [1	0      0    0] * [r cos Θ] = [x]
+    [0  cosΦ  -sinΦ 0]   [r sin Θ]   [rsinΘ * cosΦ]
+    [0  sinΦ   cosΦ 0]   [0]         [rsinΘ * sinΦ]
+    [0  0      0    1]   [1]         [1]
+
+    Θ : angle of circle creation
+    Φ : angle of circle rotation
+
+    Full circle:
+    if Θ: 0 --> 2 * pi
+       Φ: 0 --> pi
+
+    Semicircle:
+    if Θ: 0 --> pi
+       Φ: 0 --> 2 * pi
+    
+    Pseudocode:
+    for p : 0 --> 1
+	for t: 0 --> 1
+    	    x = r * cos(M_PI * t) + cx;
+	    y = r * sin(M_PI * t) * cos(2 * M_PI * p) + cy;
+	    z = r * sin(M_PI * t) * sin(2 * M_PI * p) + cz;
+
+    You can call the inner "t" circle and outer "p" rotation to understand what you
+    are doing.
+
+  Torus:
+
+    r = radius of circle
+    R = Distance from center of torus and center of circle.
+
+    [1	0      0    0] * [r cos Θ]     = [x]
+    [0  cosΦ  -sinΦ 0]   [r sin Θ + R]   [rsinΘ * cosΦ + R]
+    [0  sinΦ   cosΦ 0]   [0]             [rsinΘ * sinΦ + R]
+    [0  0      0    1]   [1]             [1]
+    
+    r is half the thickness of the torus.
+
+    In this case, phi and theta must go from 0 to 2 * pi
+
+    
+    
