@@ -705,5 +705,36 @@ for t: 0.1 --> 1
 
     In this case, phi and theta must go from 0 to 2 * pi
 
-    
-    
+
+3/29
+Wireframe / Polygon Meshes
+
+Wireframe:
+  * 3D objects are defined as the edges that connect the vertices/points.
+  * Works well with the existing edge matrix framework.
+
+Polygon Mesh:
+  * 3D objects are defined as the surfaces (triangles or quadrilaterals) that cover
+    the object.
+  * Move from edge matrix to polygon matrix.
+  * Allow us to make solid objects.
+  * Allow us to remove backfaces.
+
+Polygon Matrix:
+
+  P0	     P3  TM: [(P0, P1, P2), (P2, P3, P0), ... ]
+    *-------*	 For each polygon, draw:
+    |	    |	   P0 P1
+    |	    |	   P1 P2
+    |	    |	   P2 P0
+    *-------*
+  P1	     P2
+
+Edge Matrix:	Polygon Matrix:
+   Plot	-----------> Plot
+ draw_line ------> draw_line
+ draw_lines ---> draw_polygons *
+ add_point ------> add_point
+ add_edge ------->add_polygon *
+
+In add_polygon, points must be added in counterclockwise order.
