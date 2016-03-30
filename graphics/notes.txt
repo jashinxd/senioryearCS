@@ -738,3 +738,29 @@ Edge Matrix:	Polygon Matrix:
  add_edge ------->add_polygon *
 
 In add_polygon, points must be added in counterclockwise order.
+
+
+3/30
+Polygon Meshes
+
+Box:
+
+//Front
+P0, P1, P2
+P2, P3, P0
+
+//Back:
+P7, P5, P4
+P7, P6, P5
+
+Sphere:
+Sphere going from 0 to 20, clockwise. Rotate inwards
+
+Zoom into square 1, 2, 12, 11
+
+Generating triangles (Not for edge cases)
+1, 2, 12 --> i, i + 1, i + n + 1
+1, 12, 11 --> i, i + n + 1, i + n
+
+Using Semicircle going from 0 to 20
+
