@@ -236,3 +236,135 @@ d3.select(".chart")
 Enter selection:
 Collection of placeholder nodes for each data element for which no corresponding
 existing DOM element was found.
+
+4/4
+Closures
+1. A function is declared inside of another function.
+2. Inner function accesses a variable from the outer function (outside of the local 
+   scope of the inner function)
+3. The external function binds a value to the variable and finished (or closes)
+   before the inner function can be completed.
+
+  def repeat(s):
+    def times(x):
+      return s * x
+    return times
+
+This is an example of a nested function, but NOT a closure because s, the external
+variable to times, is not bounf to any value.
+
+  r1 = repeat("hello")
+
+This created a closure because repeat runs, bunds s to "hello", then exits, 
+returning a function (times) with s bound to "hello"
+
+  r1(2)
+
+4/5
+Aim: Decoration Day
+DN: In a new .py file, define the following functions. Predict the output of
+    flist[1](5) before running
+
+def inc(x):
+    return x + 1
+
+def dec(x):
+    return x - 1
+
+f = inc
+print f(5) --> ?
+
+flist = [inc, dec]
+
+A simple closure in Python:
+
+def makeAdder(n):
+    def	inner(x):
+        return x + n
+    return inner
+
+add3 = makeAdder(3)
+add5 = makeAdder(5)
+
+add3(10) --> 13
+add5(10) --> 5
+
+A clunky approach to class type abstraction:
+TASK: simulate a class definition using inner functions
+
+def make_counter():
+    # private "instance" data
+    # python scopring rules necessitate list
+    count = [0]
+
+    # public methods
+    def inc():
+    	count[0] = count[0] + 1
+    def dec():
+    	count[0] = count[0] - 1
+    def reset():
+    	count[0] = 0
+    def get():
+    	return count[0]
+
+    # return dictionary to allow access to all methods
+    return {'inc': inc, 'dec': dec, 'reset': reset, 'get': get}
+
+Instantiate counters:
+c1 = make_counter()
+c2 = make_counter()
+
+Must use clunky list notation:
+c1['inc']()
+c1['inc']()
+c1['inc']()
+print c1['get']() --> ?
+
+c2['inc']()
+print c2['get']() --> ?
+
+getname.py:
+import random
+def get_name():
+    names = ['tom', 'sue', 'harry', 'lisa', 'sarah', 'horatio']
+    return random.choice(names)
+
+
+def dble(f):
+    name = f()
+    return name+name
+
+print dble(get_name)
+
+WE CAN DO BETTER:
+a la this old idiom for updating a var:
+i = i + 1
+
+...you can redefine a fxn in terms of itself!
+
+get_name = dble(get_name)
+
+decorators.py:
+import random
+
+def doubler(f):
+    def inner():
+        name = f()
+        return name+name
+    return inner
+
+@doubler
+def get_name():
+    names = ['tom', 'sue', 'harry', 'lisa', 'sarah', 'horatio']
+    return random.choice(names)
+
+print get_name()
+
+TAKEAWAY:
+You can write functions that transform fxns.
+
+A python decorator is shorthand for calling a wrapper type function like doubler.
+
+A python decorator encapsulates a closure.
+
+A python decorator allows you to transparently wrap functionality
