@@ -368,3 +368,12 @@ A python decorator is shorthand for calling a wrapper type function like doubler
 A python decorator encapsulates a closure.
 
 A python decorator allows you to transparently wrap functionality
+
+4/6
+Quicksort:
+  1. Select a pivot
+  2. Partition st.
+  3. a) All vals < put LH
+     b) All vals > put RH
+     c) Pivot in final resting position
+  4. qsort on lower and upper half
