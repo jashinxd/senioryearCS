@@ -781,7 +781,7 @@ Algorithm
   3. If 90 < Theta < 270, draw the polygon.
      NOTE: Test out both inclusive and exclusive.
 
-Calculate N
+1. Calculate N
   * Cross product of two vectors that share a common endpoint and go in different
     directions. ONLY WORKS IF POINTS WERE ADDED COUNTERCLOCKWISE.
 
@@ -802,3 +802,16 @@ Calculate N
 
           -->
 	   N = <Nx, Ny, Nz>
+
+4/6
+2. Find Theta between N and V.
+  -->
+   V = <0, 0, -1> --> For a head on view of the object.
+
+  --> -->
+   N . V = N * V * cos(theta)
+
+   cos < 0 if 90 < theta < 270.
+
+   If Nx * Vx + Ny * Vy + Nz * Vz > 0, don't draw.
+   If Nx * Vx + Ny * Vy + Nz * Vz > 0, draw.
