@@ -377,3 +377,8 @@ Quicksort:
      b) All vals > put RH
      c) Pivot in final resting position
   4. qsort on lower and upper half
+
+4/11
+Final Project Ideas
+* Room Assignments for afternoons
+* 

@@ -803,6 +803,7 @@ Algorithm
           -->
 	   N = <Nx, Ny, Nz>
 
+
 4/6
 2. Find Theta between N and V.
   -->
@@ -815,3 +816,27 @@ Algorithm
 
    If Nx * Vx + Ny * Vy + Nz * Vz > 0, don't draw.
    If Nx * Vx + Ny * Vy + Nz * Vz > 0, draw.
+
+
+4/12
+Relative Coordinate System:
+* Currently, we use a global coordinate system - each object is drawn with respect
+  to the same origin/coordinate system.
+* In a relative coordinate system, each object can have its own origin/coordinate
+  system.
+* We will use a stack to store the various coordinate systems.
+
+  P -> [1 0 0 0] -> P (x + 3, y + 2)
+       [0 1 0 0]
+       [0 0 1 0]
+       [0 0 0 1]
+
+Graphics Framework:
+A. Transformations are applied to the top of the stack.
+B. The stack will be pushed and popped as needed.
+C. Drawing pipeline:
+   1. Generate points.
+   2. Multiply the points by the stack top.
+   3. Draw the object to the screen.
+   4. Clear the point matrix.
+   5. 
