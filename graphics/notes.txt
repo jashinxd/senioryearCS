@@ -826,8 +826,8 @@ Relative Coordinate System:
   system.
 * We will use a stack to store the various coordinate systems.
 
-  P -> [1 0 0 0] -> P (x + 3, y + 2)
-       [0 1 0 0]
+  P -> [1 0 0 3] -> P (x + 3, y + 2)
+       [0 1 0 2]
        [0 0 1 0]
        [0 0 0 1]
 
@@ -839,4 +839,55 @@ C. Drawing pipeline:
    2. Multiply the points by the stack top.
    3. Draw the object to the screen.
    4. Clear the point matrix.
-   5. 
+
+4/13
+
+Push --> Push a copy of the top of the stack to the stack.
+
+Making a robot with head, torso, left arm.
+
+   Command   | 	 Stack	     |      Image
+------------------------------------------------------ 
+    Push     |   Identity    | Origin at bottom left
+	     |   Identity    |
+------------------------------------------------------
+  Translate  |   T0 * I      | Origin at center 
+    X Y Z    |      I        |
+------------------------------------------------------
+     Box     |   T0 * I      | Box at center
+ X Y Z w h d |      I 	     |
+------------------------------------------------------
+    Push     |   T0 * I      | Push T0 * I 
+    	     |	 T0 * I	     |
+	     |      I	     |
+------------------------------------------------------
+  Translate  |   T1 * T0 * I | Origin moved by X Y Z
+    X Y Z    |   T0 * I      | from center.
+      	     |	    I 	     |
+------------------------------------------------------
+   Sphere    |   T1 * T0 * I | Sphere at new origin
+   X Y Z r   |	 T0 * I	     |
+       	     | 	    I	     |
+------------------------------------------------------
+    Pop	     |   T0 * I      | Origin back at center of torso
+    	     |	    I 	     |
+------------------------------------------------------
+   Push      |	 T0 * I	     | Push T0 * I
+   	     |	 T0 * I	     |
+	     |	    I 	     |
+------------------------------------------------------
+ Translate   |	 T2 * T0 * I | Origin now at upper right corner of torso 
+ 	     |   T0 * I	     |
+	     | 	    I 	     |
+------------------------------------------------------
+    Box	     |	 T2 * T0 * I | Box at new origin
+ X Y Z w h d |	 T0 * I	     |
+       	     |	    I 	     |
+
+
+If not connected, pop the identity off the stack
+If connected, keep drawing.
+If connected but also has independent motion, push to the stack.
+
+Stack is used in order to differentiate dependent/independent motion.
+
