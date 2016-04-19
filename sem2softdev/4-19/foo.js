@@ -27,3 +27,12 @@ var makeIncrementer = function() {
     }
     return inner;
 }
+
+var makeAdder = function(n) {
+    var num = 0;
+    var inner = function() {
+	num += n;
+	return num;
+    }
+    return inner;
+}
