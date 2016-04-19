@@ -891,3 +891,52 @@ If connected but also has independent motion, push to the stack.
 
 Stack is used in order to differentiate dependent/independent motion.
 
+
+4/19
+Compilers
+
+Source Code --> Compiler --> Machine Code
+
+
+1. Lexer --> 2. Parser --> 3. Semantic Analyzer --> 4. Optimizer -->
+5. Code Generator
+
+3 Steps:
+1. What is the input?
+2. What does it know?
+3. What is the output?
+
+Lexer
+  Performs lexica analysis.
+  Knows all the valid tokens in the language.
+  Generates a list of tokens based on the source code.
+  Doesn't care about structure, only checks to see if there are invalid tokens, such
+  as non-ascii chars, @, etc.
+
+EX)
+int main() {		    int
+  long x = 5 + 6;  ---->    IDENT main
+  printf("hi");	   	    (
+  return x;		    )
+} 	 		    {
+			    long
+			    IDENT x
+			    =
+			    5
+			    +
+			    6
+			    ;
+
+Parser
+  Performs syntax analysis.
+  Knows the grammar of the language.
+  Generates a syntax tree.
+
+		main
+	 --------------------	 
+	|         |	     |
+	=       printf	   return
+   -----------    |	     |
+   |	     |	 "hi"	     x
+long x	     +
+     	   5   6
