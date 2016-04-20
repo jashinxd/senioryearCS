@@ -903,7 +903,7 @@ Source Code --> Compiler --> Machine Code
 
 3 Steps:
 1. What is the input?
-2. What does it know?
+2. What does it need to know about the language?
 3. What is the output?
 
 Lexer
@@ -932,11 +932,42 @@ Parser
   Knows the grammar of the language.
   Generates a syntax tree.
 
-		main
+	      int main
 	 --------------------	 
 	|         |	     |
 	=       printf	   return
-   -----------    |	     |
+    ---------     |	     |
    |	     |	 "hi"	     x
 long x	     +
+     	    / \
      	   5   6
+
+4/20
+Semantic Analyzer
+  Knows how to identify variables and values.
+  Knows what tokens map to computer operations. 
+  Generates:
+    1) Symbol Table
+    2) List of operations in the order they must be performed.
+
+  Symbol Table
+
+  main	  function     int
+  x	  	       long
+  printf  function     int
+
+
+  Operations List
+  +:       5, 6 <-------------------------------
+						|
+  =: 	   x (links to the symbol table), *reference to previous*
+  printf:  (reference to symbol table)
+  return:  x (links to the symbol table)
+
+Optimizer
+  Does things better. Can eliminate unused variables / rewrite patterns it notices.
+
+Code Generator
+  Inputs are symbol table and operations list.
+  Knows what operations map to what processor instructions.
+  Generates the program machine code.

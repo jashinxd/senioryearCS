@@ -24,15 +24,42 @@ var makeIncrementer = function() {
     var inner = function() {
 	num += 1;
 	return num;
-    }
+    };
     return inner;
-}
+};
 
 var makeAdder = function(n) {
-    var num = 0;
-    var inner = function() {
-	num += n;
-	return num;
+    return function(x) {
+	return x+n;
     }
-    return inner;
-}
+};
+
+
+var makeCounter = function() {
+    //inst var
+    var i = 0;
+    
+    //accessor method
+    var get = function() {
+	return i;
+    };
+
+    var inc = function() {
+	i++;
+    };
+
+    var dec = function() {
+	i--;
+    };
+
+    //means of accessing members
+    return {
+	x: 'something in the dictionary',
+	set: function(n) { i = n; },
+	get: get,
+	inc: inc,
+	dec: dec,
+	setx: function(string) { this.x = string }
+    };
+};
+
