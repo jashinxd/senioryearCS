@@ -424,3 +424,5 @@ Rewrite fib(n) to employ dynamix programming
 $scp user@host:/path/to/file user@host:/path/to/file
               src	               dest
 
+
+149.89.1.30:3128 --> proxy for stuycs

@@ -971,3 +971,49 @@ Code Generator
   Inputs are symbol table and operations list.
   Knows what operations map to what processor instructions.
   Generates the program machine code.
+
+
+5/3
+--GET NOTES FROM LCT--
+
+
+5/4
+Animation
+  Pass I:
+    Look for and verify the animation commands.
+      * Frames, basename, vary.
+    If there are any errors, display message and exit.
+    Set the number of frames.
+    Set the basename.
+      * If basename is not in the mdl file, set a default one and alert the user.
+
+  Pass II:
+    Generate and store the knob values.
+    Create an array/list where each index represents a frame, and stores a list of
+    knob values for that frame.
+
+  Example
+    vary  k  0  10  0  1
+    vary  x  3  6   1  0
+
+    frame 
+      0  --> k:   0 --> x: 1  
+      1  --> k: 0.1 --> x: 1
+      2  --> k: 0.2 --> x: 1
+      3  --> k: 0.3 --> x: 1
+      4  --> k: 0.4 --> x: 0.6666...
+      5  --> k: 0.5 --> x: 0.3333...
+      6  --> k: 0.6 --> x: 0 
+      7  --> k: 0.7 --> x: 0
+      8  --> k: 0.8 --> x: 0
+      9  --> k: 0.9 --> x: 0
+      10 --> k: 1.0 --> x: 0
+
+  Pass III:
+    Drawing phase
+    If there is no animation code, draw the image.
+    If there is animation code, for each frame:
+      1. Set symbol table values for each knob based on the array from pass II.
+      2. Go through the drawing commands and apply the knobs as needed.
+      3. Save the image as basename + frame #
+   
