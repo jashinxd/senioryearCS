@@ -974,7 +974,61 @@ Code Generator
 
 
 5/3
---GET NOTES FROM LCT--
+Frames <#>
+
+    set  the # of frames
+
+Basename <name>
+
+    set prefix for all frame filenames
+
+Vary <knob> <frame start> <frame end> <start value> <end value>
+
+    describes how the knob changes over time
+    knobs are added at the end of a transformation to be animated
+
+Beginning with animation, consider the following scenario:
+
+I want to move a ball from the left hand side of the screen to the right hand side
+
+It would be nice if each frame only did a percentage of the transformation as
+follows:
+
+Frame | Command | Variables…
+
+0  move  400  0  0  0%
+
+1  move  400  0  0  25%
+
+2  move  400  0  0  50%
+
+3  move  400  0  0  75%
+
+4  move  400  0  0  100%
+
+ 
+
+Well how might one accomplish this without writing multiple script files for each frame of the animation?
+
+We can do this by implementing a new variable, the knob. The knob will replace the percentage of the transformation seen above:
+
+move 400 0 0 <knob name>
+ 
+We can then modify the knob by the new command, vary.
+
+Vary <knob name> <starting frame> <ending frame> <starting value [0,1]> <ending value [0,1]>
+
+Also, each frame name will generated from a new command, basename
+
+Basename <name>
+
+This results in the following format:
+
+Filename: <basename>0<frame #>.png
+
+The total number of frames is determined by the command frames:
+
+Frames <#>
 
 
 5/4
