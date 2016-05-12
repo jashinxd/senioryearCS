@@ -973,6 +973,18 @@ Code Generator
   Generates the program machine code.
 
 
+4/21
+We will be using:
+
+    flex (lexer) (open source version of lex)
+    bison (parser) (open source version of yacc - yet another compiler compiler)
+
+mdl (motion description language): describes the grammar of language
+
+ 
+
+Compiler generates an image file given a .mdl file describing the image.
+
 5/3
 Frames <#>
 
@@ -1071,3 +1083,33 @@ Animation
       2. Go through the drawing commands and apply the knobs as needed.
       3. Save the image as basename + frame #
    
+5/12
+Scanline Conversion
+  Filling in a polygon by drawing a series of horizontal or vertical lines.
+
+  Triangle with horizontal lines filling it in.
+
+  (x0, y0) (x1, y1)
+
+  We need to know which point is the top, middle, and bottom.
+  Ignore cases where middle is same as either top or bottom.
+  * (x0, y0) are always on the line BT
+  * (x1, y1) is on the line BM or MT.
+  * y0 and y1 are always going to be equal.
+
+  1st line: line BB (xB, yB) --> (xB, yB)
+  2nd line: line    (xB + delta(0), yB + 1) --> (xB + delta(1), yB + 1)
+
+  delta(0)? Line BT
+  m(x - xB) = (y - yB)
+  m = (yT - yB) / (xT - xB)
+  Therefore
+  (yT - yB) / (xT - xB) * (x - xB) = (y - yB)
+
+  x = xB + (xT - xB) / (yT - yB) * (y - yB)
+  (y - yB) = 1
+  x = xB + (xT - xB) / (yT - yB)
+  delta(0) = (xT - xB) / (yT - yB)
+
+  delta(1) = (xM - xB) / (yM - yB)
+             (xT - xM) / (yT - yM)
