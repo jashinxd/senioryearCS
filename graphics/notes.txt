@@ -1112,4 +1112,85 @@ Scanline Conversion
   delta(0) = (xT - xB) / (yT - yB)
 
   delta(1) = (xM - xB) / (yM - yB)
-             (xT - xM) / (yT - yM)
+  	     If y > yM,
+  	     (xT - xM) / (yT - yM)
+	   
+5/13
+Final Project:
+All start off at mdl-animation.
+Final project will be us adding to that.
+You can add scanline conversion, lighting and shading.
+MDL.spec --> includes all commands and what they should do.
+	 --> mesh --> a way to load an external 3d mesh.
+	     	  --> google sketchup
+		  --> already made mesh file
+
+	 --> tween --> different way of describing animation.
+	     	   --> morphing animation
+
+You can also add new features in mdl.
+  EX) generating pyramids, regular shapes, etc.
+      Non-linear knobs --> add an optional variable to vary to change.
+
+Scanline Conversion:
+  What if we have division by 0?
+  EX) If yM = yB or yM = yT
+  if y > yM will take care of this.
+
+
+5/18
+Screen
+      G G G
+    Y G G G
+    Y G G G  <-- This is not what we want
+    Y Y
+
+We need Z values per pixel.
+We can use a different container for Z values.
+
+     screen  	        z-buffer
+    (r, g, b)           (double)
+ 
+  B B B G G G              7  7  7
+y B B Y Y G G     y    23 23  7  7
+  B B Y Y G G	       23 23  7  7
+  B B Y Y B B	       23 23
+  B B B B B B
+       x                 x
+
+Z-Buffering
+* Store the z values for each pixel in a z buffer.
+* When you plot a point, you check its z-coordinate against the z buffer.
+  * If z-cor is greater, update the z buffer and pixels.
+  * If z-cor is smaller, do nothing.
+* The z-buffer should be initialized to the smallest possible value.
+* You must calculate the z values for each pixel.
+
+plot(x, y, screen, color) --> plot(x, y, z, screen, color, z-buffer);
+Plot should now check if x and y are in bounds and z-cor is greater than current
+z-buffer value at coord x, y, then update the screen.
+
+We need to update the header file so that plot takes these new parameters.
+Since the only thing that calls plot is draw_line, we need to update
+draw_line --> draw_polygons, scanline_convert
+
+Create a z-buffer table or modify point structure table.
+Update these functions so they take these parameters.
+THEN implement the z-buffer.
+
+OR
+
+Instead of modifying functions, make new copies of them.
+
+	   * (x1, y1, z1)
+          /
+        /
+      / 
+    /
+   *
+(x0, y0, z0)
+
+delta(z) / x-y distance --> calculating z coords.
+
+Don't use sphere and torus while testing, to start.
+
