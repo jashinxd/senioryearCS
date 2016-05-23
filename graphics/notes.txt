@@ -1194,3 +1194,40 @@ delta(z) / x-y distance --> calculating z coords.
 
 Don't use sphere and torus while testing, to start.
 
+
+5/23
+Modeling Real World Lighting
+
+2 parts to each color:
+  1. The reflective properties of the object.
+  2. Color and intensity of the light.
+
+Lighting Equation:
+  * Goal is to calculate a color value (0 - 255) for each polygon (or pixel)
+  * To generate grayscale images, you need to compute the color once per polygon.
+  * To generate a color image, you need to compute separate red, green, and blue
+    values for each polygon.
+
+  I (illumination)
+  
+  I = I ambient + I diffuse + I specular
+      		  |____________________| 
+    		   Based on Light Source
+
+  Different light sources and types of reflection
+    2 types of light sources
+      1. Ambient light
+        * Background Lighting
+	* Hits all surfaces equally
+      2. Point Light Sources
+        * Light from a particular location with a particular direction.
+	* Reflections are based on the relative location of the surface with respect
+	  to the light.
+
+    I Ambient
+      * Combination of the color of the ambient light and the amount of ambient
+      	reflection for the surface.
+
+    I Diffuse
+      * Reflection of a point source where the light is reflected back evenly in all
+      	directions.

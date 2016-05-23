@@ -440,3 +440,4 @@ Client Meeting
 
 Follow-up
   
+git branch --set-upstream-to=origin/<branch> <branch>
