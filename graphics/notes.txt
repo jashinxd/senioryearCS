@@ -1227,7 +1227,36 @@ Lighting Equation:
     I Ambient
       * Combination of the color of the ambient light and the amount of ambient
       	reflection for the surface.
+      * Comes equally from all directions.
 
     I Diffuse
       * Reflection of a point source where the light is reflected back evenly in all
       	directions.
+
+
+5/24
+Lighting Equation
+  I = I ambient + I diffuse + I specular
+  
+    I Ambient
+      * Combination of the color of the ambient light and the amount of ambient
+      	reflection for the surface.
+      * Comes equally from all directions.
+
+    I Diffuse
+      * Reflection of a point source where the light is reflected back evenly in all
+      	directions.
+
+    I Specular
+      * Light comes from a specific point.
+      * Reflected in a specific direction.
+
+     Reflective properties     |      Quality of light
+--------------------------------------------------------------
+Represented as a percentage of |  Ambient
+the light that is reflected    |    * Represented by a color value (0 - 255).
+back. (constants)   	       |  Point Light Sources
+			       |    * Represented by a color value and the location
+Ka, Kd, Ks		       |      of the light.
+    			       |
+Ka + Kd + Ks = 1	       |
