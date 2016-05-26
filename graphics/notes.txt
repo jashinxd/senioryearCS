@@ -1260,3 +1260,41 @@ back. (constants)   	       |  Point Light Sources
 Ka, Kd, Ks		       |      of the light.
     			       |
 Ka + Kd + Ks = 1	       |
+
+
+5/26
+Lighting Equation
+  I = I ambient + I diffuse + I specular
+
+  Ambient Light
+    Ca = ambient color
+    Ka = constant of ambient reflection
+  
+    I ambient = Ca * Ka
+
+Diffuse Reflection
+  Light goes in all directions
+    Cp = point light source color
+    Kd = constant of diffuse reflection
+     Θ = angle between surface normal and surface
+
+  I diffuse = Cp * Kd * cos(Θ)
+
+  If cos(Θ) < 0, set it to 0. (Ternary operator)
+                  ->    ->
+  We need to turn L and N into unit vectors (normalized)
+  ^
+  L = (Lx/|Lx|, Ly/|Ly|, Lz/|Lz|)
+
+      		         ^     ^
+  I diffuse = Cp * Kd * |L| * |N|
+
+Specular reflection
+  Light goes in one direction
+    Cp = point light source coloe
+    Ks = constant of specular reflection
+
+    The view vector is now relevant. Angle between view vector and reflected ray is
+    alpha
+
+  I specular = Cp * Ka * cos(alpha) 
