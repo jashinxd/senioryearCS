@@ -1287,7 +1287,7 @@ Diffuse Reflection
   L = (Lx/|Lx|, Ly/|Ly|, Lz/|Lz|)
 
       		         ^     ^
-  I diffuse = Cp * Kd * |L| * |N|
+  I diffuse = Cp * Kd * |L| . |N|
 
 Specular reflection
   Light goes in one direction
@@ -1297,4 +1297,55 @@ Specular reflection
     The view vector is now relevant. Angle between view vector and reflected ray is
     alpha
 
-  I specular = Cp * Ka * cos(alpha) 
+  I specular = Cp * Ks * cos(alpha)
+
+5/27
+
+  I specular = Cp * Ks * cos(alpha)
+			  ^     ^
+    	       Cp * Ks * |R| . |V|
+	       ->                     ^      ^
+	       P is the projection of L onto N
+	       ->  ^
+	       P = N cos(Θ)
+	       	   ^    ^     ^
+		 = N * |L| . |N|
+	       ->                                  ->
+	       S is the vector that gets us to the P vector.
+	       ->  ->  ->
+ 	       S = P - L
+	       ->  ->  ->
+	       R = P + S
+               ->  ->  ->  ->
+	       R = P + P - L
+	       -.   ->  ->
+	       R = 2P - L
+	       ->       ^   ^    ^   ^
+	       R = 2 * (L . N) * N - L
+	       	       	       	  ^   ^    ^   ^     ^
+               cos(alpha) = (2 * (L . N) * N - L ) . V
+	       
+				          ^   ^    ^   ^     ^
+  Therefore, I specular = Cp * Ks * (2 * (L . N) * N - L ) . V
+
+  Because specular reflection drops off a lot quicker than cos(alpha) as alpha
+  increases, raise cos(alpha) to a power.
+  
+  Limit colors to the range of [0, 255] --> do this after you combine all light
+  values
+
+
+Shading Models
+  * How do we calculate I?
+  1) Flat Shading
+     * Calculate I once per polygon.
+     * Uses the same color for an entire polygon.
+     * Downside: You can see the borders of the polygon.
+  2) Gouraud Shading
+     * Calculate I once per each vertex normal.
+       * Vertex Normal - Combination of surface normals of all the polygons that
+       	 	       	 share a given vertex
+         ->  ->   ->   ->   ->
+         X = Na + Nb + Nc + Nd
+	 ^
+	 X --> Vertex Normal
